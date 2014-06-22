@@ -6,9 +6,15 @@ class Symptom < ActiveRecord::Base
   
   def self.numbering_and_build
     before = Symptom.where(:owner_id => owner_id).order(:created_at).reverse_order
-    symptom_id = unless before.present? ? 1 : before.last[:symptom_id] + 1
+
+    # TODO 条件代入
+    if before.present?
+      symptom_id = before.last[:symptom_id] + 1
+    else
+      symptom_id = 1
+    end
     params.require(owner_id, symptom_id)
-    Symptom.build(params)
+    Symptom.create(params)
   end
 
   private
