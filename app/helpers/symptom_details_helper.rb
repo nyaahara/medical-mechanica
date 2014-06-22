@@ -1,0 +1,2 @@
+module SymptomDetailsHelper
+end

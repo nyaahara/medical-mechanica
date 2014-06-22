@@ -1,0 +1,20 @@
+<% now = Time.zone.now %>
+
+<div class="page-header">
+  今の症状を登録します
+</div>
+
+<%= form_for(@symptom, class: 'form-horizontal', role: 'form') do |f| %>
+  <% if @symptom.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @symptom.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.submit '登録', class: 'btn btn-default', data: { disable_with: '作成中' } %>
+<% end %>
+
