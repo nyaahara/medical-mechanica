@@ -6,7 +6,7 @@ class SymptomsController < ApplicationController
   end
 
   def create
-    @symptom = current_user.created_symptoms.numbering_and_build
+    @symptom = current_user.created_symptoms.numbering_and_build(current_user)
     if @symptom.save
       redirect_to @symptom, notice: '登録しました'
     else

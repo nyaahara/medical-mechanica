@@ -4,8 +4,8 @@ class Symptom < ActiveRecord::Base
 
   validate :elapsed?, on: :create
   
-  def self.numbering_and_build
-    before = Symptom.where(:owner_id => owner_id).order(:created_at).reverse_order
+  def self.numbering_and_build(user)
+    before = Symptom.where(:owner_id => user.id).order(:created_at).reverse_order
 
     # TODO 条件代入
     if before.present?
@@ -13,8 +13,7 @@ class Symptom < ActiveRecord::Base
     else
       symptom_id = 1
     end
-    params.require(owner_id, symptom_id)
-    Symptom.create(params)
+    Symptom.create(:owner_id => user.id, :symptom_id => symptom_id)
   end
 
   private
@@ -23,7 +22,7 @@ class Symptom < ActiveRecord::Base
     before = Symptom.where(:owner_id => owner_id).order(:created_at).reverse_order
     return unless before.present?
 
-    if created_at < before.last[:created_at] + 60 * 60 * 1
+    if Time.zone.now < before.last[:created_at] + 60 * 60 * 1
       errors.add(:created_at, ' 前回の登録から１時間経過していません。')
     end
   end
