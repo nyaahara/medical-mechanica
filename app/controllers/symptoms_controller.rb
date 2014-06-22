@@ -14,4 +14,8 @@ class SymptomsController < ApplicationController
     end
   end
 
+  def show
+    @symptom = Symptom.find(params[:id])
+  end
+
 end
