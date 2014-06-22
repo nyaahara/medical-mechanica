@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620172706) do
+ActiveRecord::Schema.define(version: 20140622202129) do
 
   create_table "symptom_details", force: true do |t|
     t.integer  "owner_id",          null: false
@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(version: 20140620172706) do
   add_index "symptom_details", ["part"], name: "index_symptom_details_on_part", using: :btree
 
   create_table "symptoms", force: true do |t|
-    t.integer  "owner_id"
+    t.integer  "owner_id",   null: false
     t.integer  "symptom_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "symptoms", ["symptom_id"], name: "index_symptoms_on_symptom_id", unique: true, using: :btree
+  add_index "symptoms", ["owner_id", "symptom_id"], name: "index_symptoms_on_owner_id_and_symptom_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider",   null: false
