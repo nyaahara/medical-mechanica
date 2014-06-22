@@ -41,3 +41,21 @@ gem 'spring',        group: :development
 
 gem 'omniauth', '~> 1.2.1'
 gem 'omniauth-twitter', '~> 1.0.1'
+
+
+# for TDD
+group :development, :test do
+  gem 'rspec-rails', github: 'rspec/rspec-rails'
+  gem 'rspec-core', github: 'rspec/rspec-core'
+  gem 'rspec-expectations', github: 'rspec/rspec-expectations'
+  gem 'rspec-mocks', github: 'rspec/rspec-mocks'
+  gem 'rspec-support', github: 'rspec/rspec-support'
+  gem 'factory_girl_rails', '~> 4.4.1'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 2.6.0'
+  gem 'capybara', '~> 2.2.1'
+  gem 'poltergeist', '~> 1.5.0'
+  gem 'database_cleaner', '~> 1.2.0'
+end

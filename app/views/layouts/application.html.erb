@@ -24,6 +24,7 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to '症状を登録する', new_symptom_path %></li>
           <% if logged_in? %>
             <li><%= link_to 'ログアウト', logout_path %></li>
           <% else %>
@@ -36,6 +37,11 @@
     <% if flash[:notice] %>
       <div class="alert alert-success">
         <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
       </div>
     <% end %>
     <%= yield %>

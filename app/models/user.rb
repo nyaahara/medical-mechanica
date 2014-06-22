@@ -1,4 +1,11 @@
 class User < ActiveRecord::Base
+  validates :provider, presence: true
+  validates :uid, presence: true
+  validates :nickname, length: { maximum: 50 }
+  validates :image_url, length: { maximum: 255 }
+ # validates :sex, inclusion: { in: 0..1 }, presence: false
+  
+  has_many :created_symptoms, class_name: 'Symptom', foreign_key: :owner_id, dependent: :destroy
   
   def self.find_or_create_from_auth_hash(auth_hash)
     provider = auth_hash[:provider]
