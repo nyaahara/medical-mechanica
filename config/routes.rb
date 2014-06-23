@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :symptom_details
   resources :symptoms
 
+  get 'symptoms/new/add_detail' => 'symptoms#add_detail', as: :add_detail
   root to: 'welcome#index'
   get 'auth/:provider/callback' => 'sessions#create'
 

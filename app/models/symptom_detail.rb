@@ -4,5 +4,5 @@ class SymptomDetail < ActiveRecord::Base
   validates :level, presence: true, inclusion: { in: 1..5 }
 
   belongs_to :owner, class_name: 'User'
-  belongs_to :symptom, class_name: 'Symptom'
+  belongs_to :symptom, class_name: 'Symptom', foreign_key: [:owner_id, :symptom_id]
 end

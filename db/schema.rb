@@ -16,15 +16,13 @@ ActiveRecord::Schema.define(version: 20140622202129) do
   create_table "symptom_details", force: true do |t|
     t.integer  "owner_id",          null: false
     t.integer  "symptom_id",        null: false
-    t.integer  "symptom_detail_id", null: false
+    t.integer  "symptom_detail_id"
     t.integer  "part",              null: false
     t.integer  "kind",              null: false
     t.integer  "level",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "symptom_details", ["part"], name: "index_symptom_details_on_part", using: :btree
 
   create_table "symptoms", force: true do |t|
     t.integer  "owner_id",   null: false

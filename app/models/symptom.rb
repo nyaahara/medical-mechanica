@@ -1,21 +1,23 @@
 class Symptom < ActiveRecord::Base
+  # primary_keysを指定しないと下位モデルの更新がうまくいかない。
+  self.primary_keys = :owner_id, :symptom_id
+  has_many :symptom_details, class_name:'SymptomDetail', foreign_key: [:owner_id, :symptom_id], dependent: :destroy
+  accepts_nested_attributes_for :symptom_details, allow_destroy: true
   belongs_to :owner, class_name: 'User'
-  has_many :symptom_details, class_name:'SymptomDetail', foreign_key: :symptom_id, dependent: :destroy
 
   validate :elapsed?, on: :create
   
-  def self.numbering_and_build(user)
-    before = Symptom.where(:owner_id => user.id).order(:created_at).reverse_order
+  def self.numbering(user)
+    before = Symptom.where(:owner_id => user.id).reorder(:created_at)
 
     # TODO 条件代入
     if before.present?
-      symptom_id = before.last[:symptom_id] + 1
+      before.last[:symptom_id] + 1
     else
-      symptom_id = 1
+      1
     end
-    Symptom.create(:owner_id => user.id, :symptom_id => symptom_id)
   end
-
+  
   private
   
   def elapsed?

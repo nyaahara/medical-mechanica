@@ -3,10 +3,17 @@ class SymptomsController < ApplicationController
 
   def new
     @symptom = current_user.created_symptoms.build
+    @symptom.symptom_details.build
   end
 
   def create
-    @symptom = current_user.created_symptoms.numbering_and_build(current_user)
+    p = symptom_params
+    # TODO current_userのidを代入しなきゃいけないのは、芋っぽいのでなんとかしたい。
+    p[:owner_id] = current_user.id
+    # TODO numberingの引数にcurrent_userって芋っぽすぎるのでなんとかしたい。
+    p[:symptom_id] = current_user.created_symptoms.numbering(current_user)
+    @symptom = Symptom.new(p)
+
     if @symptom.save
       redirect_to @symptom, notice: '登録しました'
     else
@@ -15,7 +22,14 @@ class SymptomsController < ApplicationController
   end
 
   def show
-    @symptom = Symptom.find(params[:id])
+    owner_id, symptom_id = params[:id].split(/,/)
+    @symptom = Symptom.find([owner_id,symptom_id])
+  end
+
+  private
+
+  def symptom_params
+    params.require(:symptom).permit(:symptom_details_attributes => [:part, :kind, :level])
   end
 
 end

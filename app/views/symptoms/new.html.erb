@@ -4,16 +4,30 @@
   今の症状を登録します
 </div>
 
-<%= form_for(@symptom, class: 'form-horizontal', role: 'form') do |f| %>
+<%= nested_form_for(@symptom) do |f| %>
   <% if @symptom.errors.any? %>
     <div class="alert alert-danger">
       <ul>
-        <% @symptom.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+      <% @symptom.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
       </ul>
     </div>
   <% end %>
+
+  <div class="field">
+  </div>
+  <%= f.fields_for :symptom_details do |detail| %>
+    <%= detail.label :part %>
+    <%= detail.text_field :part %>
+    <%= detail.label :kind %>
+    <%= detail.text_field :kind %>
+    <%= detail.label :level %>
+    <%= detail.text_field :level %>
+    <%= detail.link_to_remove "Remove this" %>
+  <% end %>
+  <%= f.link_to_add "症状を追加する", :symptom_details %>
+
 
   <%= f.submit '登録', class: 'btn btn-default', data: { disable_with: '作成中' } %>
 <% end %>
