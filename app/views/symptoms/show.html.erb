@@ -10,3 +10,17 @@
 <div class="">
   症状ID：<%= @symptom.id %> - <%= @symptom.symptom_id %>
 </div>
+
+<% @symptom.symptom_details.each do |s| %>
+<div class="">
+    <span class="">
+      kind -> <%= s.kind %>
+    </span>
+    <span class="">
+      part -> <%= s.part %>
+    </span>
+    <span class="">
+      level -> <%= s.level %>
+    </span>
+</div>
+<% end %>
