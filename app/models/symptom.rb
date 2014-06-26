@@ -1,8 +1,8 @@
 class Symptom < ActiveRecord::Base
   # primary_keysを指定しないと下位モデルの更新がうまくいかない。
   self.primary_keys = :owner_id, :symptom_id
-  has_many :symptom_details, class_name:'SymptomDetail', foreign_key: [:owner_id, :symptom_id], dependent: :destroy
-  accepts_nested_attributes_for :symptom_details, allow_destroy: true
+  has_many :details, class_name:'SymptomDetail', foreign_key: [:owner_id, :symptom_id], dependent: :destroy
+  accepts_nested_attributes_for :details, allow_destroy: true
   belongs_to :owner, class_name: 'User'
 
   validate :elapsed?, on: :create

@@ -17,7 +17,7 @@
 
   <div class="field">
   </div>
-  <%= f.fields_for :symptom_details do |detail| %>
+  <%= f.fields_for :details do |detail| %>
     <%= detail.label :part %>
     <%= detail.text_field :part %>
     <%= detail.label :kind %>
@@ -26,8 +26,8 @@
     <%= detail.text_field :level %>
     <%= detail.link_to_remove "Remove this" %>
   <% end %>
-  <%= f.link_to_add "症状を追加する", :symptom_details %>
-  <%= f.link_to_add "頭", :symptom_details, :initial_values =>'"part":"3","level":"1"' %>
+  <%= f.link_to_add "症状を追加する", :details %>
+  <%= f.link_to_add "頭", :details, :initial_values =>'"part":"3","level":"1"' %>
 
   <%= f.submit '登録', class: 'btn btn-default', data: { disable_with: '作成中' } %>
 <% end %>

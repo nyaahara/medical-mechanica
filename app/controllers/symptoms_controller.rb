@@ -3,7 +3,7 @@ class SymptomsController < ApplicationController
 
   def new
     @symptom = current_user.created_symptoms.build
-    @symptom.symptom_details.build
+    @symptom.details.build
   end
 
   def create
@@ -29,7 +29,7 @@ class SymptomsController < ApplicationController
   private
 
   def symptom_params
-    params.require(:symptom).permit(:symptom_details_attributes => [:part, :kind, :level])
+    params.require(:symptom).permit(:details_attributes => [:part, :kind, :level])
   end
 
 end
