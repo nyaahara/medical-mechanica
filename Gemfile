@@ -60,6 +60,6 @@ group :test do
   gem 'database_cleaner', '~> 1.2.0'
 end
 
-gem 'nested_form'
+gem 'nested_form', github: 'nyaahara/nested_form'
 gem 'composite_primary_keys'
 

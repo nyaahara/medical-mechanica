@@ -27,7 +27,7 @@
     <%= detail.link_to_remove "Remove this" %>
   <% end %>
   <%= f.link_to_add "症状を追加する", :symptom_details %>
-
+  <%= f.link_to_add "頭", :symptom_details, :initial_values =>'"part":"3","level":"1"' %>
 
   <%= f.submit '登録', class: 'btn btn-default', data: { disable_with: '作成中' } %>
 <% end %>

@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/nyaahara/nested_form.git
+  revision: 094004712c22ddf2028b05196c5b49c1b01f54d1
+  specs:
+    nested_form (0.3.2)
+
+GIT
   remote: git://github.com/rspec/rspec-core.git
   revision: b648cdbd7811b20aa6da0da8bbed8cffdcd1816a
   specs:
@@ -113,7 +119,6 @@ GEM
     minitest (5.3.5)
     multi_json (1.10.1)
     mysql2 (0.3.16)
-    nested_form (0.3.2)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     oauth (0.4.7)
@@ -203,7 +208,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mysql2
-  nested_form
+  nested_form!
   omniauth (~> 1.2.1)
   omniauth-twitter (~> 1.0.1)
   poltergeist (~> 1.5.0)
