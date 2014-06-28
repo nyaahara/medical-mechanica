@@ -1,4 +1,4 @@
-<% now = Time.zone.now %>
+<% now = Time.now %>
 
 <div class="page-header">
   今の症状を登録します
@@ -28,6 +28,12 @@
 </style>
 
 <%= nested_form_for(@symptom) do |f| %>
+  <div class="form-group">
+    <%= f.label :time_symptoms %>
+    <div>
+      <%= f.datetime_local_field :time_symptoms %>
+    </div>
+  </div>
   <% if @symptom.errors.any? %>
     <div class="alert alert-danger">
       <ul>

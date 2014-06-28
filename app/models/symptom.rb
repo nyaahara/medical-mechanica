@@ -5,8 +5,10 @@ class Symptom < ActiveRecord::Base
   accepts_nested_attributes_for :details, allow_destroy: true
   belongs_to :owner, class_name: 'User'
 
-  validate :elapsed?, on: :create
   validates_presence_of :details
+  validates_presence_of :time_symptoms, presence: true
+
+  validate :elapsed?, on: :create
   
   def self.numbering(user)
     before = Symptom.where(:owner_id => user.id).reorder(:created_at)
@@ -22,12 +24,15 @@ class Symptom < ActiveRecord::Base
   private
   
   def elapsed?
-    before = Symptom.where(:owner_id => owner_id).order(:created_at).reverse_order
-    return unless before.present?
+    filler_hour = 1
+    filler_sec = filler_hour * 60 * 60
 
-    if Time.zone.now < before.last[:created_at] + 60 * 60 * 1
-      errors.add(:created_at, ' 前回の登録から１時間経過していません。')
-    end
+    from = time_symptoms - filler_sec
+    to = time_symptoms + filler_sec
+
+    before = Symptom.where(:owner_id => owner_id, :time_symptoms => from..to)
+    return unless before.present?
+    errors.add(:time_symptoms, "#{filler_hour} 時間以内に他の症状が登録されています。")
   end
 
 end

@@ -2,7 +2,9 @@ class SymptomsController < ApplicationController
   before_action :authenticate
 
   def new
+    now = Time.zone.now
     @symptom = current_user.created_symptoms.build
+    @symptom.time_symptoms = now - now.sec
   end
 
   def create
@@ -28,7 +30,7 @@ class SymptomsController < ApplicationController
   private
 
   def symptom_params
-    params.require(:symptom).permit(:details_attributes => [:part, :kind, :level, :_destroy])
+    params.require(:symptom).permit(:time_symptoms, :details_attributes => [:part, :kind, :level, :_destroy])
   end
 
 end
