@@ -7,9 +7,23 @@
 <style>
   input[value="head"].kurasu {
     background-image:url('https://pbs.twimg.com/profile_images/378800000524142293/bacc5aeebe90b02e6813b35c26bdb988.png');
-    width:256px;
-    height:256px;
-    }
+    width:150px;
+    height:50px;
+  }
+  .symptom-level {
+    /** -webkit-appearance: slider-vertical; */
+    display: inline !important;
+    width:100px !important;
+  }
+  .left{
+    float:left;
+  }
+  .right{
+  }
+  .panel{
+    float:left;
+    width:310px;
+  }
 
 </style>
 
@@ -24,26 +38,17 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="anatomical">
+    <%= f.link_to_add(:details, "data-target" => "#symptoms", :initial_values =>'"part":"head"') do %>
+      あたま
+    <% end %>
   </div>
-  <%= f.fields_for :details do |detail| %>
 
-    <%= detail.label :part %>
-    <%= detail.text_field :part, :class => 'kurasu', :readonly => true %>
-    <%= detail.object.part %>
+  <div id="symptoms">
+    <%= f.fields_for :details, wrapper: false %>
+  </div>
 
-    <%= detail.label :kind %>
-    <%= detail.select :kind, 
-      options_for_select(SymptomDetail.kinds.collect { |s| [s[0].humanize, s[0]] }) %>
-
-    <%= detail.label :level %>
-    <%= detail.range_field :level,:in => 1..5, :step => '1' %>
-
-    <%= detail.link_to_remove "Remove this" %>
-  <% end %>
-  <%= f.link_to_add "頭", :details, :initial_values =>'"part":"head","level":1' %>
-  <%= f.link_to_add "体", :details, :initial_values =>'"part":"body","level":1' %>
-
+  <div style="clear:both"></div>
   <%= f.submit '登録', class: 'btn btn-default', data: { disable_with: '作成中' } %>
 <% end %>
 

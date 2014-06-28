@@ -1,0 +1,16 @@
+<div class="panel fields">
+  <div class="left">
+    <%= f.link_to_remove do %>
+      ×
+    <% end %>
+    <%= f.text_field :part, :class => 'kurasu', :readonly => true %>
+  </div>
+  <div>
+    <%= f.select :kind, options_for_select(SymptomDetail.kinds.collect {
+      |s| [s[0].humanize, s[0]] }) %>
+  </div>
+  <div>
+    <%= f.range_field :level,:in => 1..5, :step => '1', :class => 'symptom-level' %>
+  </div>
+  <div style="clear:both"></div>
+</div>
