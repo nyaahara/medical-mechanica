@@ -6,6 +6,7 @@ class Symptom < ActiveRecord::Base
   belongs_to :owner, class_name: 'User'
 
   validate :elapsed?, on: :create
+  validates_presence_of :details
   
   def self.numbering(user)
     before = Symptom.where(:owner_id => user.id).reorder(:created_at)
