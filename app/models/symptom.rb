@@ -9,6 +9,9 @@ class Symptom < ActiveRecord::Base
   validates_presence_of :time_symptoms, presence: true
 
   validate :elapsed?, on: :create
+  validate do |model|
+    self.past?(time_symptoms)
+  end
   
   def self.numbering(user)
     before = Symptom.where(:owner_id => user.id).reorder(:created_at)
@@ -19,6 +22,10 @@ class Symptom < ActiveRecord::Base
     else
       1
     end
+  end
+
+  def past?(time)
+    errors.add(:time_symptoms,"未来の日付は登録できません。") if Time.zone.now <= time
   end
   
   private
@@ -34,5 +41,6 @@ class Symptom < ActiveRecord::Base
     return unless before.present?
     errors.add(:time_symptoms, "#{filler_hour} 時間以内に他の症状が登録されています。")
   end
+
 
 end
