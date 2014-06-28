@@ -4,6 +4,15 @@
   今の症状を登録します
 </div>
 
+<style>
+  input[value="head"].kurasu {
+    background-image:url('https://pbs.twimg.com/profile_images/378800000524142293/bacc5aeebe90b02e6813b35c26bdb988.png');
+    width:256px;
+    height:256px;
+    }
+
+</style>
+
 <%= nested_form_for(@symptom) do |f| %>
   <% if @symptom.errors.any? %>
     <div class="alert alert-danger">
@@ -18,16 +27,22 @@
   <div class="field">
   </div>
   <%= f.fields_for :details do |detail| %>
+
     <%= detail.label :part %>
-    <%= detail.text_field :part %>
+    <%= detail.text_field :part, :class => 'kurasu', :readonly => true %>
+    <%= detail.object.part %>
+
     <%= detail.label :kind %>
-    <%= detail.text_field :kind %>
+    <%= detail.select :kind, 
+      options_for_select(SymptomDetail.kinds.collect { |s| [s[0].humanize, s[0]] }) %>
+
     <%= detail.label :level %>
-    <%= detail.text_field :level %>
+    <%= detail.range_field :level,:in => 1..5, :step => '1' %>
+
     <%= detail.link_to_remove "Remove this" %>
   <% end %>
-  <%= f.link_to_add "症状を追加する", :details %>
-  <%= f.link_to_add "頭", :details, :initial_values =>'"part":"3","level":"1"' %>
+  <%= f.link_to_add "頭", :details, :initial_values =>'"part":"head","level":1' %>
+  <%= f.link_to_add "体", :details, :initial_values =>'"part":"body","level":1' %>
 
   <%= f.submit '登録', class: 'btn btn-default', data: { disable_with: '作成中' } %>
 <% end %>

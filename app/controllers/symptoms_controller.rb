@@ -3,7 +3,6 @@ class SymptomsController < ApplicationController
 
   def new
     @symptom = current_user.created_symptoms.build
-    @symptom.details.build
   end
 
   def create
