@@ -28,7 +28,7 @@ class SymptomsController < ApplicationController
   private
 
   def symptom_params
-    params.require(:symptom).permit(:details_attributes => [:part, :kind, :level])
+    params.require(:symptom).permit(:details_attributes => [:part, :kind, :level, :_destroy])
   end
 
 end
