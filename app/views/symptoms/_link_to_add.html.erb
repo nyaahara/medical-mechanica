@@ -1,4 +1,4 @@
-<div class="anatomical">
+<div class="anatomical <%=p%>" style="visibility: hidden;">
   <%= form.link_to_add(:details, "data-target" => "#symptoms",
                        :initial_values =>'"part":"'+p+'"') do %>
     <%= SymptomDetail.parts.find{|k,v|k==p}[0] %>
