@@ -9,7 +9,6 @@
 <div class="page-header">
   今の症状を登録します
 </div>
-<a href="javascript:a();">aaa</a>
 
 <style>
   input[value="head"].kurasu {
@@ -52,7 +51,7 @@
   <% end %>
 
   <!-- add tech by canvas -->
-  <div id="canvas"></div>
+  <canvas id="all-over"></canvas>
 
   <!-- hidden buttons !!!important don't remove this !!! -->
   <%= render :partial => "link_to_add", :locals => { :p => 'head',:form => f } %>

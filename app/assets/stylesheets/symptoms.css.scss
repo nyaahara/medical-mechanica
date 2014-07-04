@@ -1,14 +1,14 @@
 // Place all the styles related to the symptoms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-div#canvas {
+canvas#all-over {
   position: relative;
   width: 135px;
   height: 231px;
   background-color: silver;
   background-image:url(image-path('head.png'));
 
-  div.block {
+  span.block {
     position: absolute;
     width: 8px;
     height: 8px;
