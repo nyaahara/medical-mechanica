@@ -16,10 +16,14 @@ $ ->
 
     for part in parts_list
       
-      item = $('input.kurasu[value=head]')[0]
-      if item? and item.parentNode.parentNode.style.display != "none"
+      ## 部位の入力オブジェクト全体から、display:none;に設定されたものを除算し、表示されている数を計算します。
+      ## 一つ以上あれば、入力オブジェクトの追加は無い。
+      views = $("input.kurasu[value=#{part.name}]")
+      nones = (item for item in views when item.parentNode.parentNode.style.display is "none")
+      if views.length - nones.length >= 1
         break
 
+      ## クリックした座標が、部位リストで定義した座標の中に収まる場合は入力オブジェクトを追加する。
       if x in part.x and y in part.y
         canvas[0].getContext('2d').fillRect(x, y, 4, 4);
         $("div.#{part.name} a")[0].click()
