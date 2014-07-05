@@ -6,10 +6,13 @@ parts_list = [
 ]
 
 $ ->
-  $("canvas#all-over").dblclick (e) ->
+  $("canvas#all-over").on 'dblclick touchstart', (e) ->
+    e.preventDefault
     canvas = $(e.target)
-    x = e.pageX - canvas.position().left
-    y = e.pageY - canvas.position().top
+    pageX = e.pageX || e.originalEvent.changedTouches[0].pageX
+    pageY = e.pageY || e.originalEvent.changedTouches[0].pageY
+    x = pageX - canvas.position().left
+    y = pageY - canvas.position().top
 
     for part in parts_list
       
