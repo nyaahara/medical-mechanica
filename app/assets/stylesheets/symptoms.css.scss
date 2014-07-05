@@ -3,15 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 canvas#all-over {
   position: relative;
-  width: 135px;
-  height: 231px;
   background-color: silver;
   background-image:url(image-path('head.png'));
-
-  span.block {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: red;
-  }
 }

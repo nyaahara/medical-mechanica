@@ -33,6 +33,8 @@
 
 </style>
 
+<p id="aaa">ppp</p>
+
 <%= nested_form_for(@symptom) do |f| %>
   <div class="form-group">
     <%= f.label :time_symptoms %>
@@ -51,7 +53,7 @@
   <% end %>
 
   <!-- add tech by canvas -->
-  <canvas id="all-over"></canvas>
+  <canvas id="all-over" width="135" height="231"></canvas>
 
   <!-- hidden buttons !!!important don't remove this !!! -->
   <%= render :partial => "link_to_add", :locals => { :p => 'head',:form => f } %>
