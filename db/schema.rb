@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140628145611) do
+ActiveRecord::Schema.define(version: 20140706063039) do
 
   create_table "symptom_details", force: true do |t|
     t.integer  "owner_id",          null: false
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140628145611) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "time_symptoms"
+    t.string   "symptom_image"
   end
 
   add_index "symptoms", ["owner_id", "symptom_id"], name: "index_symptoms_on_owner_id_and_symptom_id", unique: true, using: :btree

@@ -1,4 +1,7 @@
 class Symptom < ActiveRecord::Base
+
+  mount_uploader :symptom_image, SymptomImageUploader
+
   # primary_keysを指定しないと下位モデルの更新がうまくいかない。
   self.primary_keys = :owner_id, :symptom_id
   has_many :details, class_name:'SymptomDetail', foreign_key: [:owner_id, :symptom_id], dependent: :destroy
