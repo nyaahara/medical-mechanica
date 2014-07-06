@@ -40,27 +40,31 @@ $ ->
         break
 
 $ ->
-  $("#register").on 'click', (e) ->
-    url = $("canvas#all-over")[0].toDataURL('image/png')
-    $("#symptom_symptom_image")[0].value = url
-
-$ ->
   # ×ボタン押した時に描画した点をクリアします
   $(document).on 'nested:fieldAdded', (e) ->
-    remove_link = $(e.target).find(".remove_nested_fields")
-    remove_link.attr("x", x)
-    remove_link.attr("y", y)
-    remove_link.on 'click', (e) ->
+    $(e.target).find(".pointX").attr("value", x)
+    $(e.target).find(".pointY").attr("value", y)
+    $(".remove_nested_fields").on 'click', (e) ->
       ctx = $("canvas#all-over")[0].getContext('2d')
-      point = $(e.target)[0].attributes
-      ctx.clearRect(point.x.value, point.y.value, 4, 4)
+      point = $(e.target)[0].parentNode.parentNode
+      pointX = $(point).find(".pointX")[0].value
+      pointY = $(point).find(".pointY")[0].value
+      ctx.clearRect(pointX, pointY, 4, 4)
+
+  # ページ初期描画時に表示されている部位のためのクリア処理。上のやつは、追加したものにたいする描画クリア。
+# TODO せめて処理を関数化して共通化しよう。。。ださすぎるでこれ。
+  $(".remove_nested_fields").on 'click', (e) ->
+    ctx = $("canvas#all-over")[0].getContext('2d')
+    point = $(e.target)[0].parentNode.parentNode
+    pointX = $(point).find(".pointX")[0].value
+    pointY = $(point).find(".pointY")[0].value
+    ctx.clearRect(pointX, pointY, 4, 4)
 
 $ ->
   canvas = $("canvas#all-over")[0]
   ctx = canvas.getContext('2d')
-  image = new Image()
-  image.src = $("#point")[0].src
-  image.onload = ->
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.drawImage(image, 0, 0)
+  for field in $(".fields")
+    pointX = $(field).find(".pointX")[0].value
+    pointY = $(field).find(".pointY")[0].value
+    ctx.fillRect(pointX, pointY, 4, 4);
 

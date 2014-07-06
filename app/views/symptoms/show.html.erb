@@ -12,19 +12,31 @@
 </div>
 
 <canvas id="all-over" width="135" height="231">
-  <%= image_tag @symptom.symptom_image.url, :id => "point", :style => "display:none;" %>
 </canvas>
 
 <% @symptom.details.each do |s| %>
 <div class="">
     <span class="">
-      kind -> <%= s.kind %>
+      part -> <%= s.part %>
     </span>
     <span class="">
-      part -> <%= s.part %>
+      kind -> <%= s.kind %>
     </span>
     <span class="">
       level -> <%= s.level %>
     </span>
+    <span class="">
+      point(<%= s.x %>, <%= s.y %>)
+    </span>
 </div>
+<% end %>
+
+
+
+
+-----------
+<%= nested_form_for(@symptom) do |f| %>
+  <div id="symptoms">
+    <%= f.fields_for :details, wrapper: false %>
+  </div>
 <% end %>

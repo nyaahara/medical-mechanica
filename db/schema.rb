@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140706063039) do
+ActiveRecord::Schema.define(version: 20140706163512) do
 
   create_table "symptom_details", force: true do |t|
     t.integer  "owner_id",          null: false
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 20140706063039) do
     t.integer  "level",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "x"
+    t.string   "y"
   end
 
   create_table "symptoms", force: true do |t|
