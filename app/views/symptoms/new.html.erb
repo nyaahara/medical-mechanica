@@ -1,19 +1,12 @@
 <% now = Time.now %>
-<script>
-  function a(){
-    alert("start a")
-    window.NestedFormEvents.addFields
-  }
-</script>
 
 <div class="page-header">
   今の症状を登録します
 </div>
 
 <style>
-  input[value="head"].kurasu {
+  input.kurasu{
     display:block;
-    background-image:url(<%= asset_path 'head.png' %>);
     width:50px;
     height:50px;
     text-align:center;
@@ -23,6 +16,10 @@
     border-radius: 15px;
     border-style:solid;
   }
+
+  input[value="head"].kurasu {background-image:url(<%= asset_path 'head.png' %>);}
+  input[value="body"].kurasu {background-image:url(<%= asset_path 'head.png' %>);}
+
   .symptom-level {
     /** -webkit-appearance: slider-vertical; */
     display: inline !important;
@@ -39,8 +36,6 @@
   }
 
 </style>
-
-<p id="aaa">ppp</p>
 
 <%= nested_form_for(@symptom) do |f| %>
   <div class="form-group">
@@ -66,6 +61,7 @@
 
   <!-- hidden buttons !!!important don't remove this !!! -->
   <%= render :partial => "link_to_add", :locals => { :p => 'head',:form => f } %>
+  <%= render :partial => "link_to_add", :locals => { :p => 'body',:form => f } %>
 
   <div id="symptoms">
     <%= f.fields_for :details, wrapper: false %>
