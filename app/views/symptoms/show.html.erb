@@ -11,6 +11,10 @@
   症状ID：<%= @symptom.id %> - <%= @symptom.symptom_id %>
 </div>
 
+<canvas id="all-over" width="135" height="231">
+  <%= image_tag @symptom.symptom_image.url, :id => "point", :style => "display:none;" %>
+</canvas>
+
 <% @symptom.details.each do |s| %>
 <div class="">
     <span class="">

@@ -17,3 +17,5 @@
 
 secrets.yml
 *.swp
+
+public/uploads

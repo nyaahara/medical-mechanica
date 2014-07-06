@@ -1,6 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
 parts_list = [
   { name:"head", x:[55..79], y:[6..34] }
 ]
@@ -37,4 +34,18 @@ $ ->
     ctx = $("canvas#all-over")[0].getContext ('2d');
     ctx.clearRect(0,0,300,300)
     alert "deldel"
+
+$ ->
+  $("#register").on 'click', (e) ->
+    url = $("canvas#all-over")[0].toDataURL('image/png')
+    $("#symptom_symptom_image")[0].value = url
+
+$ ->
+  canvas = $("canvas#all-over")[0]
+  ctx = canvas.getContext('2d')
+  image = new Image()
+  image.src = $("#point")[0].src
+  image.onload = ->
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctx.drawImage(image, 0, 0)
 

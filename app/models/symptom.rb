@@ -1,12 +1,12 @@
 class Symptom < ActiveRecord::Base
 
-  mount_uploader :symptom_image, SymptomImageUploader
-
   # primary_keysを指定しないと下位モデルの更新がうまくいかない。
   self.primary_keys = :owner_id, :symptom_id
   has_many :details, class_name:'SymptomDetail', foreign_key: [:owner_id, :symptom_id], dependent: :destroy
   accepts_nested_attributes_for :details, allow_destroy: true
   belongs_to :owner, class_name: 'User'
+
+  mount_uploader :symptom_image, SymptomImageUploader
 
   validates_presence_of :details
   validates_presence_of :time_symptoms, presence: true

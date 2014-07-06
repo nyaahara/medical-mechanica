@@ -15,6 +15,14 @@ class SymptomsController < ApplicationController
     p[:symptom_id] = current_user.created_symptoms.numbering(current_user)
     @symptom = Symptom.new(p)
 
+    ## canvas入力をpngにして保存する
+    path = "#{Rails.root}/public/uploads/symptom/symptom_image/#{p[:owner_id]},#{p[:symptom_id]}"
+    FileUtils.mkdir_p(path) unless FileTest.exist?(path)
+    File.open("#{path}/image.png", "wb") { |f|
+      f.write Base64.decode64(p[:symptom_image].sub!('data:image/png;base64,', ''))
+    }
+    @symptom[:symptom_image] = "image.png"
+
     if @symptom.save
       redirect_to @symptom, notice: '登録しました'
     else
@@ -30,7 +38,7 @@ class SymptomsController < ApplicationController
   private
 
   def symptom_params
-    params.require(:symptom).permit(:time_symptoms, :details_attributes => [:part, :kind, :level, :_destroy])
+    params.require(:symptom).permit(:time_symptoms, :symptom_image, :symptom_image_cache, :details_attributes => [:part, :kind, :level, :_destroy])
   end
 
 end
