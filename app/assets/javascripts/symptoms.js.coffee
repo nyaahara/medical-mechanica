@@ -54,21 +54,21 @@ $ ->
     kin = $("#modal-kinds")[0].value
     $(e.target).find(".pointX")[0].value = x
     $(e.target).find(".pointY")[0].value = y
-    $(e.target).find(".kurasu")[0].value = par
-    $(".kind select").val kin 
+    $(e.target).find(".kurasu")[0].defaultValue = par
+    $(e.target).find(".kind select").val kin 
     $(e.target).find(".symptom-level")[0].value = lev
 
 $ ->
   # ×ボタン押した時に描画した点をクリアします
-  $(document).on 'nested:fieldAdded', (e) ->
-    $(e.target).find(".pointX").attr("value", x)
-    $(e.target).find(".pointY").attr("value", y)
-    $(".remove_nested_fields").on 'click', (e) ->
-      ctx = $("canvas#all-over")[0].getContext('2d')
-      point = $(e.target)[0].parentNode.parentNode
-      pointX = $(point).find(".pointX")[0].value
-      pointY = $(point).find(".pointY")[0].value
-      ctx.clearRect(pointX, pointY, 4, 4)
+  #$(document).on 'nested:fieldAdded', (e) ->
+ #   $(e.target).find(".pointX").attr("value", x)
+ #   $(e.target).find(".pointY").attr("value", y)
+ #   $(".remove_nested_fields").on 'click', (e) ->
+ #     ctx = $("canvas#all-over")[0].getContext('2d')
+ #     point = $(e.target)[0].parentNode.parentNode
+ #     pointX = $(point).find(".pointX")[0].value
+ #     pointY = $(point).find(".pointY")[0].value
+ #     ctx.clearRect(pointX, pointY, 4, 4)
 
   # ページ初期描画時に表示されている部位のためのクリア処理。上のやつは、追加したものにたいする描画クリア。
 # TODO せめて処理を関数化して共通化しよう。。。ださすぎるでこれ。
