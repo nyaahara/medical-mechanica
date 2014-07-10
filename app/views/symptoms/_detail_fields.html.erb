@@ -7,7 +7,7 @@
     <% end %>
     <%= f.text_field :part, :class => 'kurasu', :readonly => true %>
   </div>
-  <div>
+  <div class="kind">
     <%= f.select :kind, options_for_select(SymptomDetail.kinds.collect {
       |s| [s[0].humanize, s[0]] }) %>
   </div>

@@ -7,11 +7,6 @@ parts_list = [
   { name:"body", x:[30..100], y:[35..65] }
 ]
 
-# canvasの点を削除するときのために、座標をグローバル変数にしています。
-# ださいのでなんとかしたいです。。。
-x=0
-y=0
-
 $ ->
   $("canvas#all-over").on 'dblclick touchstart', (e) ->
     e.preventDefault
@@ -34,10 +29,34 @@ $ ->
       ## クリックした座標が、部位リストで定義した座標の中に
       ## 収まる場合は入力オブジェクトを追加する。
       if x in part.x and y in part.y
-        ctx = canvas[0].getContext('2d')
-        ctx.fillRect(x, y, 4, 4);
-        $("div.#{part.name} a")[0].click()
+        $('#dialogHeader')[0].innerHTML = part.name
+        $('#modal-part')[0].value = part.name
+        $('#modal-x')[0].value = x
+        $('#modal-y')[0].value = y
+        $('#modal-add').modal('toggle')
         break
+
+$ ->
+  $('#modal-add').on 'hide.bs.modal', (e) ->
+    x = $('#modal-x')[0].value
+    y = $('#modal-y')[0].value
+    ctx = $("canvas#all-over")[0].getContext('2d')
+    ctx.fillRect(x, y, 4, 4)
+    link = $("#form-add a")[0]
+    link.click()
+
+$ ->
+  $(document).on 'nested:fieldAdded', (e) ->
+    par = $('#modal-part')[0].value
+    x = $('#modal-x')[0].value
+    y = $('#modal-y')[0].value
+    lev = $("#modal-level")[0].value
+    kin = $("#modal-kinds")[0].value
+    $(e.target).find(".pointX")[0].value = x
+    $(e.target).find(".pointY")[0].value = y
+    $(e.target).find(".kurasu")[0].value = par
+    $(".kind select").val kin 
+    $(e.target).find(".symptom-level")[0].value = lev
 
 $ ->
   # ×ボタン押した時に描画した点をクリアします
