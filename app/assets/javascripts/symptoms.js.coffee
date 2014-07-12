@@ -88,3 +88,6 @@ $ ->
     pointY = $(field).find(".pointY")[0].value
     ctx.fillRect(pointX, pointY, 4, 4);
 
+# エンターキー押下でsubmitされるのを防ぐ
+$ ->
+  $(document).on "keypress", "input:not(.allow_submit)", (event) -> event.which != 13
