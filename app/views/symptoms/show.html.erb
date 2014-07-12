@@ -11,13 +11,14 @@
   症状ID：<%= @symptom.id %> - <%= @symptom.symptom_id %>
 </div>
 
-<canvas id="all-over" width="135" height="231">
-</canvas>
+
+<%= render partial: "canvas" %>
+<%= render partial: "drawPoint", locals: {data: @symptom} %>
 
 <% @symptom.details.each do |s| %>
 <div class="">
-    <span class="">
-      part -> <%= s.part %>
+    <span class="part-<%=s.part%>">
+      part -> <%=s.part%>
     </span>
     <span class="">
       kind -> <%= s.kind %>
@@ -26,17 +27,9 @@
       level -> <%= s.level %>
     </span>
     <span class="">
-      point(<%= s.x %>, <%= s.y %>)
+      <%= hidden_field :s, :x %>
+      <%= hidden_field :s, :y %>
     </span>
 </div>
 <% end %>
 
-
-
-
------------
-<%= nested_form_for(@symptom) do |f| %>
-  <div id="symptoms">
-    <%= f.fields_for :details, wrapper: false %>
-  </div>
-<% end %>

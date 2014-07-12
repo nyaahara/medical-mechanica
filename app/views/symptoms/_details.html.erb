@@ -1,0 +1,26 @@
+<!-- hidden buttons !!!important don't remove this !!! -->
+<div id="form-add" style="visibility: hidden;">
+  <%= form.link_to_add "", :details, "data-target" => "#symptoms" %>
+</div>
+
+<div id="symptoms">
+  <%= form.fields_for :details do |f|%>
+    <div class="panel fields">
+      <%= f.hidden_field :x, :class => 'pointX' %>
+      <%= f.hidden_field :y, :class => 'pointY' %>
+      <div class="left">
+        <%= f.link_to_remove do %>
+          ×
+        <% end %>
+        <%= f.text_field :part, :class => 'kurasu', :readonly => true %>
+      </div>
+      <div class="kind">
+        <%= f.select :kind, options_for_select( SymptomDetail.kinds.collect{ |s| [s[0].humanize, s[0]] } ,:selected => f.object.kind ) %>
+      </div>
+      <div>
+        <%= f.range_field :level,:in => 1..5, :step => '1', :class => 'symptom-level' %>
+      </div>
+      <div style="clear:both"></div>
+    </div>
+  <% end %>
+</div>
