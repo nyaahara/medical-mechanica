@@ -8,7 +8,7 @@ parts_list = [
 ]
 
 $ ->
-  $("canvas#all-over").on 'dblclick touchstart', (e) ->
+  $("canvas#all-over").on 'click', (e) ->
     e.preventDefault
     canvas = $(e.target)
     pageX = e.pageX || e.originalEvent.changedTouches[0].pageX
@@ -33,11 +33,11 @@ $ ->
         $('#modal-part')[0].value = part.name
         $('#modal-x')[0].value = x
         $('#modal-y')[0].value = y
-        $('#modal-add').modal('toggle')
+        $('#modalAdd').modal('show')
         break
 
 $ ->
-  $('#modal-add').on 'hide.bs.modal', (e) ->
+  $('#modalAdd').on 'hide.bs.modal', (e) ->
     x = $('#modal-x')[0].value
     y = $('#modal-y')[0].value
     ctx = $("canvas#all-over")[0].getContext('2d')
