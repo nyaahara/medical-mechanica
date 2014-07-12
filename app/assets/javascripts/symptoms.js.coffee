@@ -37,7 +37,8 @@ $ ->
         break
 
 $ ->
-  $('#modalAdd').on 'hide.bs.modal', (e) ->
+  $('#add-symptom').on 'click', (e) ->
+    $('#modalAdd').modal('hide')
     x = $('#modal-x')[0].value
     y = $('#modal-y')[0].value
     ctx = $("canvas#all-over")[0].getContext('2d')
