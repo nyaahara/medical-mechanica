@@ -19,4 +19,8 @@ class Sick < ActiveRecord::Base
     status == 0 # TODO enumにする
   end
 
+  def recover_completely?
+    status == 1
+  end
+
 end

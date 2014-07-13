@@ -13,7 +13,31 @@
 
   <!-- TODO modalにしてどうやったら完治したのかを書く -->
   <% if @sick.created_by?(current_user) & @sick.still_sick? %>
-    <%= link_to('fix this', sick_path(@sick), :method => :put) %>
+   <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#recover_completely">
+    完治しました
+   </button>
+<div class="modal fade" id="recover_completely" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true"> 
+  <div class="modal-dialog"> 
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+        <h4 class="modal-title" id="dialogHeader">何をしたら完治したか教えて下さい。</h4> 
+      </div> 
+    <div class="modal-body"> 
+      <%= form_for(@sick) do |f| %>
+        <%= f.text_area :recover_completely_comment %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <%= f.submit 'なおりました。',  class: 'btn btn-default', data: { disable_with: '作成中' } %>
+      <% end %>
+    </div> 
+    </div> 
+  </div> 
+</div>
+  <% end %>
+
+
+  <% if @sick.recover_completely? %>
+    <%= @sick.recover_completely_comment %> したら、完治しましたよ。
   <% end %>
 
 </div>
