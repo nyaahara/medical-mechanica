@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  has_many :has_sick, class_name: 'Sick', foreign_key: :owner_id
+  has_many :progresses
+  has_many :parts
+
   validates :provider, presence: true
   validates :uid, presence: true
   validates :nickname, length: { maximum: 50 }

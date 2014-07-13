@@ -2,14 +2,21 @@
   <%=@user.nickname%>
 </div>
 
-<%= @symptoms.each do |symptom| %>
+<%= @sicks.each do |sick| %>
   <div class="">
-    <%= link_to(symptom) do%>
-      <%= symptom.time_symptoms || 'no time' %>
-    <% end %>
+        <%= link_to(sick) do%>
+          sick group:
+          <%= sick.created_at || 'no time' %>::
+          <%= sick.status %>
+        <% end %>
+    <% sick.progresses.each do |progress| %>
+        <%= link_to(progress) do%>
+          <%= progress.progress_at || 'no time' %>
+        <% end %>
 
-    <% symptom.details.each do |detail| %>
-      <%= detail.part %>(<%= detail.kind %>)
+        <% progress.parts.each do |part| %>
+          <%= part.part %>(<%= part.kind %>)
+        <% end %>
     <% end %>
   </div>
 <% end %>

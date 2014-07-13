@@ -1,0 +1,43 @@
+<div class="">
+  <h1>
+    <%= @sick.owner.nickname %>さんの体調不良グループ
+  </h1>
+  <div class="">
+    <%= @sick.created_at %>
+    <%= @sick.status %>
+  </div>
+
+  <%= link_to(@sick.owner) do %>
+    ユーザをみる
+  <% end %>
+
+  <%= link_to('fix this', sick_path(@sick), :method => :put) %>
+
+</div>
+
+<%= paginate @progresses %> 
+
+<% @progresses.each do |progress| %>
+  <div class="">
+    <%= render partial: "shared/canvas" %>
+    <%= render partial: "shared/drawPoint", locals: {data: progress} %>
+
+    <% progress.parts.each do |s| %>
+    <div class="">
+        <span class="part-<%=s.part%>">
+          part -> <%=s.part%>
+        </span>
+        <span class="">
+          kind -> <%= s.kind %>
+        </span>
+        <span class="">
+          level -> <%= s.level %>
+        </span>
+        <span class="">
+          <%= hidden_field :s, :x %>
+          <%= hidden_field :s, :y %>
+        </span>
+    </div>
+    <% end %>
+  </div>
+<% end %>

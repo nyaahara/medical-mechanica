@@ -63,4 +63,6 @@ end
 
 gem 'nested_form', github: 'nyaahara/nested_form'
 gem 'composite_primary_keys'
+gem 'kaminari'
+
 

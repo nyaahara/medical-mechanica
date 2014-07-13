@@ -3,11 +3,11 @@
 </div>
 
 <div class-"list-group">
-  <% @symptoms.each do |symptom| %>
-    <%= link_to(symptom, class: 'list-group-item') do %>
+  <% @sicks.each do |sick| %>
+    <%= link_to(sick, class: 'list-group-item') do %>
       <h4 class="list-group-item-heading">
-        <%= symptom.owner.nickname %>さんの症状(<%= symptom.id %>)
-        <%= symptom.created_at %>
+        <%= sick.owner.nickname %>さんの症状(<%= sick.id %>)
+        <%= sick.created_at %>
       </h4>
     <% end %>
   <% end %>
