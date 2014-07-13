@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :symptoms
+  resources :users
 
   get 'symptoms/new/add_detail' => 'symptoms#add_detail', as: :add_detail
   root to: 'welcome#index'

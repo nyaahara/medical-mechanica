@@ -1,0 +1,16 @@
+<div class="">
+  <%=@user.nickname%>
+</div>
+
+<%= @symptoms.each do |symptom| %>
+  <div class="">
+    <%= link_to(symptom) do%>
+      <%= symptom.time_symptoms || 'no time' %>
+    <% end %>
+
+    <% symptom.details.each do |detail| %>
+      <%= detail.part %>(<%= detail.kind %>)
+    <% end %>
+  </div>
+<% end %>
+

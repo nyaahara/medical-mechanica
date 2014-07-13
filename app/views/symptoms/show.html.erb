@@ -5,6 +5,11 @@
   <div class="">
     <%= @symptom.created_at %>
   </div>
+
+  <%= link_to(@symptom.owner) do %>
+    ユーザをみる
+  <% end %>
+
 </div>
 
 <div class="">
