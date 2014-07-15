@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140713113702) do
+ActiveRecord::Schema.define(version: 20140714144102) do
 
   create_table "parts", force: true do |t|
     t.integer  "user_id",     null: false
@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(version: 20140713113702) do
   add_index "progresses", ["sick_id"], name: "index_progresses_on_sick_id", using: :btree
   add_index "progresses", ["user_id", "sick_id"], name: "index_progresses_on_user_id_and_sick_id", using: :btree
   add_index "progresses", ["user_id"], name: "index_progresses_on_user_id", using: :btree
+
+  create_table "sick_comments", force: true do |t|
+    t.integer  "comment_by_user_id"
+    t.integer  "sick_id"
+    t.integer  "user_id"
+    t.integer  "is_owner_comment"
+    t.string   "contents"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sick_comments", ["sick_id", "user_id"], name: "index_sick_comments_on_sick_id_and_user_id", using: :btree
+  add_index "sick_comments", ["user_id", "sick_id"], name: "index_sick_comments_on_user_id_and_sick_id", using: :btree
 
   create_table "sicks", force: true do |t|
     t.integer  "owner_id"

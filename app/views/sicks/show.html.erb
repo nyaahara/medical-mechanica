@@ -68,3 +68,31 @@
     <% end %>
   </div>
 <% end %>
+
+
+<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#comment">
+  コメントする or アドバイスする
+</button>
+<div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true"> 
+  <div class="modal-dialog"> 
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+        <h4 class="modal-title" id="dialogHeader">もだるたいとる</h4> 
+      </div> 
+      <div class="modal-body"> 
+        <%= form_for(@sick.sick_comments.build, url: sick_sick_comments_path(@sick), remote:true) do |sf| %>
+          <%= sf.text_area :contents %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <%= sf.button 'コメントする', class: 'btn btn-default', data: { disable_with: '作成中' } %>
+        <% end %>
+      </div> 
+    </div> 
+  </div> 
+</div>
+
+<% @comments.each do|comment| %>
+  <div><%= comment.id %> ん？<%= comment.comment_by_user.nickname %> :<%= comment.contents %></div>
+<% end %>
+どうして、最後に空のcommentがループされるんだろ？
+

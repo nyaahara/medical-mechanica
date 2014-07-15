@@ -1,6 +1,7 @@
 class Sick < ActiveRecord::Base
   has_many :progresses
   has_many :parts
+  has_many :sick_comments
   belongs_to :owner, class_name: 'User'
 
   before_save :default_values

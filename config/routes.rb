@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     resources :parts
   end
 
-  resources :sicks
+  resources :sicks do
+    resources :sick_comments
+  end
 
   get 'symptoms/new/add_detail' => 'symptoms#add_detail', as: :add_detail
   root to: 'welcome#index'

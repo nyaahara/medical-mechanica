@@ -1,8 +1,10 @@
 class SicksController < ApplicationController
-  
+
   def show
     @sick = Sick.find(params[:id])
     @progresses = @sick.progresses.page params[:page]
+    @comments = @sick.sick_comments.includes(:comment_by_user).order(:created_at)
+
     render :show
   end
 
