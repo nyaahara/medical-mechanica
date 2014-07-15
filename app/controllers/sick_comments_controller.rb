@@ -6,7 +6,7 @@ class SickCommentsController < ApplicationController
     comment.contents = params[:sick_comment][:contents]
 
    if comment.save
-      flash[:notice] = 'コメントしました or アドバイスしました'                                  
+      flash[:notice] = 'コメントしました or アドバイスしました'
       head 201
     else
       render json: { messages: ticket.errors.full_messages }, status: 422                

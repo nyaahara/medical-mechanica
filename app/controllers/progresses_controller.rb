@@ -2,13 +2,6 @@ class ProgressesController < ApplicationController
 
   before_action :authenticate
 
-  def new
-    now = Time.zone.now
-    @progress = current_user.progresses.build
-    @progress.progress_at = now - now.sec
-    @still_sicks = Sick.where(:owner_id => current_user.id, :status => 0)
-  end
-
   def create
     
     permited_params = progress_params
@@ -28,6 +21,10 @@ class ProgressesController < ApplicationController
 
     if @progress.save
       redirect_to @progress, notice: '登録しました'
+
+      # これじゃだめぽ。。。
+      # flash[:notice] = '登録しましたー'
+      # head 201
     else
       render :new
     end
