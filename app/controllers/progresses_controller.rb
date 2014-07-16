@@ -5,26 +5,22 @@ class ProgressesController < ApplicationController
   def create
     
     permited_params = progress_params
-    sick = if permited_params[:sick_id]
+    @sick = if permited_params[:sick_id]
       Sick.find(permited_params[:sick_id])
     else
       Sick.create(:owner_id => current_user.id)
     end
 
-    @progress = sick.progresses.build(permited_params) do |p|
+    @progress = @sick.progresses.build(permited_params) do |p|
       p.user_id = current_user.id
       p.parts.each do |part|
         part.user_id = current_user.id
-        part.sick_id = sick.id
+        part.sick_id = @sick.id
       end
     end
 
     if @progress.save
-      redirect_to @progress, notice: '登録しました'
-
-      # これじゃだめぽ。。。
-      # flash[:notice] = '登録しましたー'
-      # head 201
+      redirect_to @sick, notice: '登録しました'
     else
       render :new
     end
