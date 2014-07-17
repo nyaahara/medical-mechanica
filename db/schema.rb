@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714144102) do
+ActiveRecord::Schema.define(version: 20140716150603) do
 
   create_table "parts", force: true do |t|
     t.integer  "user_id",     null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140714144102) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "recover_completely_comment"
+    t.string   "label"
   end
 
   add_index "sicks", ["owner_id"], name: "index_sicks_on_owner_id", using: :btree

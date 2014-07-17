@@ -5,11 +5,14 @@ class ProgressesController < ApplicationController
   def create
     
     permited_params = progress_params
-    @sick = if permited_params[:sick_id]
+    @sick = if permited_params[:sick_id].present?
       Sick.find(permited_params[:sick_id])
     else
       Sick.create(:owner_id => current_user.id)
     end
+    
+    @sick.label = params[:sick][:label]
+    @sick.save!
 
     @progress = @sick.progresses.build(permited_params) do |p|
       p.user_id = current_user.id
