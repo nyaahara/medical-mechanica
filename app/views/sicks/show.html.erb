@@ -49,6 +49,8 @@
     <%= render partial: "shared/canvas" %>
     <%= render partial: "shared/drawPoint", locals: {data: progress} %>
 
+    <%= link_to '編集する', edit_progress_path(progress) %>
+
     <% progress.parts.each do |s| %>
     <div class="">
         <span class="part-<%=s.part%>">

@@ -1,5 +1,5 @@
 <div class="page-header">
-  今の症状を登録します
+  へんシューして下さい。
 </div>
 
 <%= render partial: "shared/messages", locals: {err: @progress.errors} %>
@@ -9,7 +9,6 @@
   
 <%= nested_form_for(@progress) do |f| %>
 
-  <%= f.select 'sick_id', options_for_select(@still_sicks.map {|s| [s.label||s.created_at, s.id]}), :include_blank => true %>
   <div class="form-group">
     <%= f.datetime_local_field :progress_at %>
   </div>

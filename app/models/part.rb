@@ -13,4 +13,12 @@ class Part < ActiveRecord::Base
   validates :kind, presence: true , inclusion: { in: KINDS }
   validates :level, presence: true, inclusion: { in: 1..5 }
 
+  before_save :set_key
+
+  private
+
+  def set_key
+
+  end
+
 end
