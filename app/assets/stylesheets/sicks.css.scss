@@ -1,3 +1,38 @@
 // Place all the styles related to the sicks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+canvas#all-over {
+  position: relative;
+  background-color: silver;
+  background-image:url(image-path('head.png'));
+}
+
+input.progress-part{
+  display:block;
+  width:50px;
+  height:50px;
+  text-align:center;
+  padding-bottom:28px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  border-style:solid;
+}
+
+input[value="head"].progress-part{ background-image:url(image-path('head.png')); }
+input[value="body"].progress-part{ background-image:url(image-path('head.png')); }
+
+.progress-level {
+  /** -webkit-appearance: slider-vertical; */
+  display: inline !important;
+  width:100px !important;
+}
+.left{
+  float:left;
+}
+.right{
+}
+.panel{
+  float:left;
+  width:310px;
+}

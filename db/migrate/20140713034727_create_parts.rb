@@ -7,6 +7,7 @@ class CreateParts < ActiveRecord::Migration
       t.integer :part, null:false
       t.integer :kind, null:false
       t.integer :level, null:false
+      t.string :memo
       t.integer :x, null:false
       t.integer :y, null:false
 

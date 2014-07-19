@@ -14,15 +14,15 @@
           ×
         <% end %>
 
-        <%= f.text_field :part, :class => 'kurasu', :readonly => true %>
+        <%= f.text_field :part, :class => 'progress-part', :readonly => true %>
       </div>
 
-      <div class="kind">
+      <div class="progress-kind">
         <%= f.select :kind, options_for_select( Part.kinds.collect{ |s| [s[0].humanize, s[0]] } ,:selected => f.object.kind ) %>
       </div>
 
       <div>
-        <%= f.range_field :level,:in => 1..5, :step => '1', :class => 'symptom-level' %>
+        <%= f.range_field :level,:in => 1..5, :step => '1', :class => 'progress-level' %>
       </div>
 
       <div>

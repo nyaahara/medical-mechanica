@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140719173321) do
+ActiveRecord::Schema.define(version: 20140714144102) do
 
   create_table "parts", force: true do |t|
     t.integer  "user_id",     null: false
@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(version: 20140719173321) do
     t.integer  "part",        null: false
     t.integer  "kind",        null: false
     t.integer  "level",       null: false
+    t.string   "memo"
     t.integer  "x",           null: false
     t.integer  "y",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "memo"
   end
 
   add_index "parts", ["kind"], name: "index_parts_on_kind", using: :btree
@@ -65,37 +65,12 @@ ActiveRecord::Schema.define(version: 20140719173321) do
   create_table "sicks", force: true do |t|
     t.integer  "owner_id"
     t.integer  "status",                     null: false
+    t.string   "recover_completely_comment"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "recover_completely_comment"
-    t.string   "label"
   end
 
   add_index "sicks", ["owner_id"], name: "index_sicks_on_owner_id", using: :btree
-
-  create_table "symptom_details", force: true do |t|
-    t.integer  "owner_id",          null: false
-    t.integer  "symptom_id",        null: false
-    t.integer  "symptom_detail_id"
-    t.integer  "part",              null: false
-    t.integer  "kind",              null: false
-    t.integer  "level",             null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "x"
-    t.string   "y"
-  end
-
-  create_table "symptoms", force: true do |t|
-    t.integer  "owner_id",      null: false
-    t.integer  "symptom_id",    null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "time_symptoms"
-    t.string   "symptom_image"
-  end
-
-  add_index "symptoms", ["owner_id", "symptom_id"], name: "index_symptoms_on_owner_id_and_symptom_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider",   null: false

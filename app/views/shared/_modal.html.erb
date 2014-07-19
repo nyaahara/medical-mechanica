@@ -10,12 +10,12 @@
       <input type=hidden value="" id="modal-y"/>
       <input type=hidden value="" id="modal-part"/>
       <input type="range" id="modal-level" min=1 max=5 value=2>
-      <%= select_tag 'modal-kinds', options_for_select(SymptomDetail.kinds.collect {|s| [s[0].humanize, s[0]] }) %>
+      <%= select_tag 'modal-kinds', options_for_select(Part.kinds.collect {|s| [s[0].humanize, s[0]] }) %>
       <input type="textarea" id="modal-memo">
     </div> 
     <div class="modal-footer"> 
       <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-      <button type="button" class="btn btn-primary" id="add-symptom">追加</button>
+      <button type="button" class="btn btn-primary" id="add-progress">追加</button>
     </div> 
     </div> 
   </div> 

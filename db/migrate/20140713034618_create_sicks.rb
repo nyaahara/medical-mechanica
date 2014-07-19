@@ -3,6 +3,7 @@ class CreateSicks < ActiveRecord::Migration
     create_table :sicks do |t|
       t.integer :owner_id
       t.integer :status, null:false
+      t.string :recover_completely_comment
 
       t.timestamps
     end
