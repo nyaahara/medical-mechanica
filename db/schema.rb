@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716150603) do
+ActiveRecord::Schema.define(version: 20140719173321) do
 
   create_table "parts", force: true do |t|
     t.integer  "user_id",     null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20140716150603) do
     t.integer  "y",           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "memo"
   end
 
   add_index "parts", ["kind"], name: "index_parts_on_kind", using: :btree

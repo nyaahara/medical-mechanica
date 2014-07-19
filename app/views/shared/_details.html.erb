@@ -25,6 +25,10 @@
         <%= f.range_field :level,:in => 1..5, :step => '1', :class => 'symptom-level' %>
       </div>
 
+      <div>
+        <%= f.text_field :memo, :class => 'progress-memo' %>
+      </div>
+
       <div style="clear:both"></div>
     </div>
   <% end %>

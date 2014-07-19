@@ -53,11 +53,13 @@ $ ->
     y = $('#modal-y')[0].value
     lev = $("#modal-level")[0].value
     kin = $("#modal-kinds")[0].value
+    mem = $('#modal-memo')[0].value
     $(e.target).find(".pointX")[0].value = x
     $(e.target).find(".pointY")[0].value = y
     $(e.target).find(".kurasu")[0].defaultValue = par
     $(e.target).find(".kind select").val kin 
     $(e.target).find(".symptom-level")[0].value = lev
+    $(e.target).find(".progress-memo")[0].value = mem
 
 $ ->
   # ×ボタン押した時に描画した点をクリアします
