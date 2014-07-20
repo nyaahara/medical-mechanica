@@ -5,7 +5,7 @@
 
 <div id="parts">
   <%= form.fields_for :parts do |f|%>
-    <div class="panel fields">
+    <div class="panel">
       <%= f.hidden_field :x, :class => 'pointX' %>
       <%= f.hidden_field :y, :class => 'pointY' %>
       <div class="left">
@@ -14,7 +14,8 @@
           ×
         <% end %>
 
-        <%= f.text_field :part, :class => 'progress-part', :readonly => true %>
+        <canvas class="progress-canvas" width="50" height="50"></canvas>
+        <%= f.hidden_field :part, :class => 'progress-part' %>
       </div>
 
       <div class="progress-kind">

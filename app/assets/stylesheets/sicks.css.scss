@@ -7,20 +7,14 @@ canvas#all-over {
   background-image:url(image-path('head.png'));
 }
 
-input.progress-part{
-  display:block;
-  width:50px;
-  height:50px;
-  text-align:center;
-  padding-bottom:28px;
+.progress-canvas{
+  position: relative;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
   border-style:solid;
+  background-image:url(image-path('head.png'));
 }
-
-input[value="head"].progress-part{ background-image:url(image-path('head.png')); }
-input[value="body"].progress-part{ background-image:url(image-path('head.png')); }
 
 .progress-level {
   /** -webkit-appearance: slider-vertical; */
