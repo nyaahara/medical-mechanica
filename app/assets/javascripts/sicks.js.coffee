@@ -60,6 +60,8 @@ $ ->
 
     # add slider practice!!
     #  一応、いけた。しかし、編集時は初期ロードでこれをやらないといけんねー。
+# なぜかlevel5で登録される。
+# value=1みたい。text_fieldにして動作を確認してみた。
     decorate_level( $(part_detail.find(".progress-level")[0]) )
 #    slide_bar = $(part_detail.find(".progress-level")[0])
 #    slide_bar.slider {
