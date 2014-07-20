@@ -60,12 +60,12 @@ $ ->
 
     # add slider practice!!
     #  一応、いけた。しかし、編集時は初期ロードでこれをやらないといけんねー。
-    # あと、バーの奥に変なのいるw
-    slide_bar = $(part_detail.find(".progress-level")[0])
-    slide_bar.slider {
-      formatter: (value) ->
-        'Current value: ' + value
-    }
+    decorate_level( $(part_detail.find(".progress-level")[0]) )
+#    slide_bar = $(part_detail.find(".progress-level")[0])
+#    slide_bar.slider {
+#      formatter: (value) ->
+#        'Current value: ' + value
+#    }
 
     ##################################
 
@@ -133,3 +133,11 @@ draw_part_icon = (part_detail) ->
   ctx.fillRect(half_of_canvas_width, half_of_canvas_height, 4, 4)
 ############################################################################
 
+
+
+############################################################################
+decorate_level = (slide_bar) ->
+  slide_bar.slider {
+    formatter: (value) ->
+      'Current value: ' + value
+  }
