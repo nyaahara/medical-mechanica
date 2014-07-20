@@ -2,14 +2,42 @@
   <h1>煩ってる人達、最近登録された症状の一覧。</h1>
 </div>
 
-<div class-"list-group">
-  <% @sicks.each do |sick| %>
-    <%= link_to(sick, class: 'list-group-item') do %>
-      <h4 class="list-group-item-heading">
-        <%= sick.owner.nickname %>さんの症状(<%= sick.id %>)
-        <%= sick.created_at %>
-      </h4>
-    <% end %>
+<ul class="media-list">
+  <% @progresses.each do |progress| %>
+    <li class="media col-xs-12 col-sm-6 col-md-4">
+      <div class="pull-left">
+        <%= image_tag progress.user.image_url %>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          @<%= progress.user.nickname %><br/>
+          <%= progress.created_at.strftime('%Y/%m/%d %H:%M') %> 
+        </h4>
+        <% progress.parts.each do |part| %>
+          <%= part.part %>
+        <% end %>
+      </div>
+      <%= link_to(progress.sick, class: 'btn btn-default pull-right') do %>
+        詳細
+      <% end %>
+    </li>
   <% end %>
-</div>
+</ul>
 
+<ul class="media-list">
+  <% @users.each do |user| %>
+    <li class="media col-xs-12 col-sm-6 col-md-4">
+      <div class="pull-left">
+        <%= image_tag user.image_url %>
+      </div>
+      <div class="media-body">
+        <h4 class="media-heading">
+          @<%= user.nickname %><br/>
+        </h4>
+      </div>
+      <%= link_to(user, class: 'btn btn-default pull-right') do %>
+        詳細
+      <% end %>
+    </li>
+  <% end %>
+</ul>
