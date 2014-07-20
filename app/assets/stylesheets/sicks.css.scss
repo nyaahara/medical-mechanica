@@ -8,12 +8,17 @@ canvas#all-over {
 }
 
 .progress-canvas{
-  position: relative;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
-  border-style:solid;
   background-image:url(image-path('head.png'));
+  margin-right:10px;
+}
+
+
+.progress-part{
+  background-color:transparent;
+  border:none;
 }
 
 .progress-level {
@@ -29,4 +34,8 @@ canvas#all-over {
 .panel{
   float:left;
   width:310px;
+}
+
+#ex1Slider .slider-selection {
+  background: #BABABA;
 }

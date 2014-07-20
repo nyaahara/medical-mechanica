@@ -52,11 +52,22 @@ $ ->
     part_detail.find(".pointX")[0].value = $('#modal-x')[0].value
     part_detail.find(".pointY")[0].value = $('#modal-y')[0].value
     part_detail.find(".progress-part")[0].defaultValue = $('#modal-part')[0].value
-    part_detail.find(".progress-kind select").val $("#modal-kinds")[0].value 
+    part_detail.find(".progress-kind").val $("#modal-kinds")[0].value 
     part_detail.find(".progress-level")[0].value = $("#modal-level")[0].value
     part_detail.find(".progress-memo")[0].value = $('#modal-memo')[0].value
     draw_all_over(part_detail)
     draw_part_icon(part_detail)
+
+    # add slider practice!!
+    #  一応、いけた。しかし、編集時は初期ロードでこれをやらないといけんねー。
+    # あと、バーの奥に変なのいるw
+    slide_bar = $(part_detail.find(".progress-level")[0])
+    slide_bar.slider {
+      formatter: (value) ->
+        'Current value: ' + value
+    }
+
+    ##################################
 
   #############
   ## ×ボタン押した時に描画した点をクリアします
@@ -121,3 +132,4 @@ draw_part_icon = (part_detail) ->
   ctx = canvas.getContext('2d')
   ctx.fillRect(half_of_canvas_width, half_of_canvas_height, 4, 4)
 ############################################################################
+

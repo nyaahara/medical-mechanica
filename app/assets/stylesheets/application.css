@@ -13,4 +13,5 @@
  *= require_tree .
  *= require bootstrap.min
  *= require_self
+ *= require bootstrap-slider
  */
