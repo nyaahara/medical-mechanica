@@ -54,22 +54,10 @@ $ ->
     part_detail.find(".progress-part")[0].defaultValue = $('#modal-part')[0].value
     part_detail.find(".progress-kind").val $("#modal-kinds")[0].value 
     part_detail.find(".progress-level")[0].value = $("#modal-level")[0].value
+    decorate_level($(part_detail.find(".progress-level")[0]))
     part_detail.find(".progress-memo")[0].value = $('#modal-memo')[0].value
     draw_all_over(part_detail)
     draw_part_icon(part_detail)
-
-    # add slider practice!!
-    #  一応、いけた。しかし、編集時は初期ロードでこれをやらないといけんねー。
-# なぜかlevel5で登録される。
-# value=1みたい。text_fieldにして動作を確認してみた。
-    decorate_level( $(part_detail.find(".progress-level")[0]) )
-#    slide_bar = $(part_detail.find(".progress-level")[0])
-#    slide_bar.slider {
-#      formatter: (value) ->
-#        'Current value: ' + value
-#    }
-
-    ##################################
 
   #############
   ## ×ボタン押した時に描画した点をクリアします
@@ -79,8 +67,10 @@ $ ->
   #############
   ## all-over(全体)と、part要素のアイコンを描画します。
   for field in $(".fields")
-    draw_all_over($(field))
-    draw_part_icon($(field))
+    part_detail = $(field)
+    draw_all_over(part_detail)
+    draw_part_icon(part_detail)
+    decorate_level($(part_detail.find(".progress-level")[0]))
 
   #############
   ## エンターキー押下でsubmitされるのを防ぐ
@@ -140,6 +130,13 @@ draw_part_icon = (part_detail) ->
 ############################################################################
 decorate_level = (slide_bar) ->
   slide_bar.slider {
-    formatter: (value) ->
-      'Current value: ' + value
+    value: Number(slide_bar.value)
   }
+
+  $(slide_bar).on 'slide', (e) ->
+    hidden_field = $(e.target)[0]
+    level = Number(hidden_field.value)
+    slider_selection = $(hidden_field.parentNode).find(".slider-selection")[0]
+    slider_selection.style.background = 'rgb('+(level*50)+',200,200)'
+############################################################################
+
