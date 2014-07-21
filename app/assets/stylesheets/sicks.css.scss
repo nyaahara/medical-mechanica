@@ -12,13 +12,15 @@ canvas#all-over {
   -moz-border-radius: 15px;
   border-radius: 15px;
   background-image:url(image-path('head.png'));
-  margin-right:10px;
 }
 
 
 .progress-part{
   background-color:transparent;
   border:none;
+  margin-top:13px;
+  text-align:right;
+  vertical-align:top;
 }
 
 .progress-level {
@@ -38,4 +40,8 @@ canvas#all-over {
 
 #ex1Slider .slider-selection {
   background: #BABABA;
+}
+
+input, select, option, textarea {
+  font-size: 16px !important;
 }
