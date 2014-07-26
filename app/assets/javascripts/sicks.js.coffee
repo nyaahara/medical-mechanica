@@ -53,8 +53,8 @@ $ ->
     part_detail.find(".pointY")[0].value = $('#modal-y')[0].value
     part_detail.find(".progress-part")[0].defaultValue = $('#modal-part')[0].value
     part_detail.find(".progress-kind").val $("#modal-kinds")[0].value 
-    part_detail.find(".progress-level")[0].value = $("#modal-level")[0].value
-    decorate_level($(part_detail.find(".progress-level")[0]))
+    # part_detail.find(".progress-level")[0].value = $("#modal-level")[0].value
+    # decorate_level($(part_detail.find(".progress-level")[0]))
     part_detail.find(".progress-memo")[0].value = $('#modal-memo')[0].value
     draw_all_over(part_detail)
     draw_part_icon(part_detail)
@@ -70,12 +70,15 @@ $ ->
     part_detail = $(field)
     draw_all_over(part_detail)
     draw_part_icon(part_detail)
-    decorate_level($(part_detail.find(".progress-level")[0]))
+    # decorate_level($(part_detail.find(".progress-level")[0]))
 
   #############
   ## エンターキー押下でsubmitされるのを防ぐ
   $(document).on "keypress", "input:not(.allow_submit)", (event) -> event.which != 13
 
+  $('#mybtm').on 'click',(e) ->
+    input = $(e.target).find('input')[1] 
+    input.nextSibling.textContent = if input.checked then 'serious' else 'not serious'
 
 ############################################################################
 draw_all_over = (part_detail) ->
