@@ -17,9 +17,6 @@ ActiveRecord::Schema.define(version: 20140714144102) do
     t.integer  "user_id",     null: false
     t.integer  "sick_id",     null: false
     t.integer  "progress_id", null: false
-    t.integer  "part",        null: false
-    t.integer  "kind",        null: false
-    t.integer  "level",       null: false
     t.string   "memo"
     t.integer  "x",           null: false
     t.integer  "y",           null: false
@@ -27,12 +24,8 @@ ActiveRecord::Schema.define(version: 20140714144102) do
     t.datetime "updated_at"
   end
 
-  add_index "parts", ["kind"], name: "index_parts_on_kind", using: :btree
-  add_index "parts", ["part"], name: "index_parts_on_part", using: :btree
   add_index "parts", ["progress_id"], name: "index_parts_on_progress_id", using: :btree
   add_index "parts", ["sick_id"], name: "index_parts_on_sick_id", using: :btree
-  add_index "parts", ["user_id", "sick_id", "kind"], name: "index_parts_on_user_id_and_sick_id_and_kind", using: :btree
-  add_index "parts", ["user_id", "sick_id", "part"], name: "index_parts_on_user_id_and_sick_id_and_part", using: :btree
   add_index "parts", ["user_id", "sick_id", "progress_id"], name: "index_parts_on_user_id_and_sick_id_and_progress_id", using: :btree
   add_index "parts", ["user_id"], name: "index_parts_on_user_id", using: :btree
 

@@ -5,39 +5,19 @@
 
 <div id="parts">
   <%= form.fields_for :parts do |f|%>
-    <%= f.hidden_field :x, :class => 'pointX' %>
-    <%= f.hidden_field :y, :class => 'pointY' %>
-
     <div class="media col-xs-12 col-sm-6 col-md-4">
-      <div class="media-heading">
-      <!--
-        いま、ここのレイアウト調整してた。
-        ヘッダに閉じるボタン、部位の名前、部位のサムネイルを出したいのだ。
-        だが、いい感じに配置できないという問題。
-        bootstrapのみでなんとかしようというのが間違っているのかも。
 
-        #2
-          大変よい感じになったので、あとはこれをスマホでみたときにどうなりますかってことです。
-        #3
-          だめやった。120px
-      -->
-        <div class="form-group">
-          <div class="pull-left">
-            <%= f.link_to_remove :class => 'btn btn-danger btn-sm' do %>close<% end %>
-          </div>
-          <%= f.text_field :part, :class => 'progress-part', :readonly => true %>
-        </div>
-      </div>
-
-      <div class="media-body">
+      <%= f.link_to_remove :class => 'btn btn-danger btn-lg' do %>close<% end %>
+      <div class="pull-right">
         <canvas class="progress-canvas" width="50" height="50"></canvas>
-
-          <%= f.select :kind, options_for_select( Part.kinds.collect{ |s| [s[0].humanize, s[0]] } ,:selected => f.object.kind ), {}, { :class => 'progress-kind form-control' } %>
-        
-          <%= f.text_area :memo, :class => 'progress-memo form-control', :rows => 5 %>
-          <p class="help-block">あとX文字入力できます。</p>
-        
       </div>
+
+      <div class="form-group">
+        <%= f.hidden_field :x, :class => 'pointX' %>
+        <%= f.hidden_field :y, :class => 'pointY' %>
+        <%= f.text_area :memo, :class => 'progress-memo form-control', :rows => 5 %>
+      </div>
+        
     </div>
   <% end %>
 </div>

@@ -52,24 +52,11 @@
     <%= link_to '編集する', edit_progress_path(progress) %>
 
     <% progress.parts.each do |s| %>
-    <div class="">
-        <span class="part-<%=s.part%>">
-          part -> <%=s.part%>
-        </span>
-        <span class="">
-          kind -> <%= s.kind %>
-        </span>
-        <span class="">
-          level -> <%= s.level %>
-        </span>
-        <span class="">
-          memo -> <%= s.memo %>
-        </span>
-        <span class="">
-          <%= hidden_field :s, :x %>
-          <%= hidden_field :s, :y %>
-        </span>
-    </div>
+      <div class="">
+        <%= hidden_field :s, :x %>
+        <%= hidden_field :s, :y %>
+        <%= s.memo %>
+      </div>
     <% end %>
   </div>
 <% end %>

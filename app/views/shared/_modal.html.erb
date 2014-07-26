@@ -2,21 +2,17 @@
   <div class="modal-dialog"> 
     <div class="modal-content"> 
       <div class="modal-header"> 
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-        <h4 class="modal-title" id="dialogHeader"></h4> 
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+        <h4 class="modal-title" id="dialogHeader">新しい症状</h4> 
       </div> 
-    <div class="modal-body"> 
-      <input type=hidden value="" id="modal-x"/>
-      <input type=hidden value="" id="modal-y"/>
-      <input type=hidden value="" id="modal-part"/>
-      <input type="range" id="modal-level" min=1 max=5 value=2>
-      <%= select_tag 'modal-kinds', options_for_select(Part.kinds.collect {|s| [s[0].humanize, s[0]] }) %>
-      <input type="textarea" id="modal-memo">
-    </div> 
-    <div class="modal-footer"> 
-      <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-      <button type="button" class="btn btn-primary" id="add-progress">追加</button>
-    </div> 
+      <div class="modal-body"> 
+        <input type=hidden value="" id="modal-x"/>
+        <input type=hidden value="" id="modal-y"/>
+        <textarea id="modal-memo" class="form-control" rows="6" placeholder="ここに症状を入力"></textarea>
+      </div> 
+      <div class="modal-footer"> 
+        <button type="button" class="btn btn-lg btn-primary" id="add-progress">追加</button>
+      </div> 
     </div> 
   </div> 
 </div>

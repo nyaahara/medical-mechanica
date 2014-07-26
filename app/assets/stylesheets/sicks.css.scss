@@ -14,36 +14,6 @@ canvas#all-over {
   background-image:url(image-path('head.png'));
 }
 
-
-.progress-part{
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  background-color:transparent;
-  border:none;
-  margin-top:1px;
-  margin-left:10px;
-  vertical-align:top;
-}
-
-.progress-level {
-  /** -webkit-appearance: slider-vertical; */
-  display: inline !important;
-  width:100px !important;
-}
-.left{
-  float:left;
-}
-.right{
-}
-.panel{
-  float:left;
-  width:310px;
-}
-
-#ex1Slider .slider-selection {
-  background: #BABABA;
-}
-
 input, select, option, textarea {
   font-size: 16px !important;
 }
