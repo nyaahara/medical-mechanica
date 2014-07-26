@@ -44,20 +44,13 @@
 
 <%= paginate @progresses %> 
 
+
 <% @progresses.each do |progress| %>
   <div class="">
+    <%= link_to '編集する', edit_progress_path(progress) %>
     <%= render partial: "shared/canvas" %>
     <%= render partial: "shared/drawPoint", locals: {data: progress} %>
-
-    <%= link_to '編集する', edit_progress_path(progress) %>
-
-    <% progress.parts.each do |s| %>
-      <div class="">
-        <%= hidden_field :s, :x %>
-        <%= hidden_field :s, :y %>
-        <%= s.memo %>
-      </div>
-    <% end %>
+    <%= render partial: "shared/showDetails", locals: {data: progress} %>
   </div>
 <% end %>
 

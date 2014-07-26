@@ -12,19 +12,7 @@
 
 </div>
 
-<div class="">
-  症状ID：<%= @progress.sick_id %> - <%= @progress.id %>
-</div>
-
-
 <%= render partial: "shared/canvas" %>
 <%= render partial: "shared/drawPoint", locals: {data: @progress} %>
-
-<% @progress.parts.each do |s| %>
-<div class="">
-  <%= hidden_field :s, :x %>
-  <%= hidden_field :s, :y %>
-  <%= s.memo %>
-</div>
-<% end %>
+<%= render partial: "shared/showDetails", locals: {data: @progress} %>
 
