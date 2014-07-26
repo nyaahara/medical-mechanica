@@ -1,0 +1,12 @@
+<% data.parts.each do |s| %>
+<div class="fields">
+  <div class="thumbnail col-xs-12">
+    <div class="pull-left">
+      <canvas class="progress-canvas" width="50" height="50"></canvas>
+    </div>
+    <%= hidden_field :s, :x, :value => s[:x], :class => 'pointX' %>
+    <%= hidden_field :s, :y, :value => s[:y], :class => 'pointY' %>
+    <%= s.memo %>
+  </div>
+</div>
+<% end %>
