@@ -28,8 +28,7 @@
     <% end %>
   </div>
 
-
-
+  <!-- TODO #92 -->
   <% if @sick.recover_completely? %>
     <%= @sick.recover_completely_comment %> したら、完治しましたよ。
   <% end %>
@@ -38,30 +37,51 @@
 
 <%= paginate @progresses %> 
 <% @progresses.each do |progress| %>
-  <div class="">
-    <% if @sick.created_by?(current_user) %>
-      <%= link_to '編集', edit_progress_path(progress), :class => 'btn btn-default btn-sm'%>
-    <% end %>
-  </div>
   <div style="display:none;" class="">
     <%= render partial: "shared/canvas" %>
     <%= render partial: "shared/drawPoint", locals: {data: progress} %>
   </div>
-    <%= render partial: "shared/showDetails", locals: {data: progress} %>
+
+  <div style="clear:both">
+    <%= progress.progress_at.strftime('%Y/%m/%d %H:%M') %>
+    <% if @sick.created_by?(current_user) %>
+      <%= link_to '編集', edit_progress_path(progress)%>
+    <% end %>
+  </div>
+  <%= render partial: "shared/showDetails", locals: {data: progress} %>
+
+  <div style="clear:both"></div>
   
 <% end %>
-  <div class="btn-group col-xs-12">
-  <button class="btn btn-default btn-block" data-toggle="modal" data-target="#comment">
-    コメントする
-  </button>
+
+<div id="comments">
+  <ul class="media col-xs-12">
+  <% @comments.each do|comment| %>
+    <li>
+      <div class="pull-left">
+        <%= image_tag comment.comment_by_user.image_url %>
+      </div>
+      <h4>
+        @<%= comment.comment_by_user.nickname %><br/>
+        <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %> 
+      </h4>
+      <% if comment.is_owner_comment? %>
+        これは、オーナーのコメントですよ。
+      <% end %>
+      <%= comment.contents %> 
+    </li>
+  <% end %>
+  </ul>
 </div>
 
-
-<%= render partial: "modalComment" %>
-
-<% @comments.each do|comment| %>
-  <div><%= comment.id %><%= comment.comment_by_user.nickname %> :<%= comment.contents %></div>
-<% end %>
+<div id="comment">
+  <div class="form-group col-xs-6">
+    <%= form_for(@sick.sick_comments.build, url: sick_sick_comments_path(@sick), remote:true) do |sf| %>
+      <%= sf.text_area :contents, :class => 'modal-comment form-control', :rows => 6, :placeholder => 'コメントを入力'  %>
+      <%= sf.submit 'コメントする', class: 'btn btn-lg btn-primary btn-block', data: { disable_with: '送信中' } %>
+    <% end %>
+  </div>
+</div>
 
 <script type="text/javascript">
 $(function() {

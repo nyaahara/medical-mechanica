@@ -4,6 +4,10 @@ class SickComment < ActiveRecord::Base
   belongs_to :sick
   before_save :default_values
 
+  def is_owner_comment?
+    is_owner_comment == 1
+  end
+
   def default_values
     parent = Sick.find(self.sick_id)
     self.user_id = parent.owner_id ||= 0
