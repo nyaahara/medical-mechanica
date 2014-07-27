@@ -21,14 +21,18 @@ class ProgressesController < ApplicationController
     @progress = @sick.progresses.build(permited_params)
 
     if @progress.save
-      redirect_to @sick, notice: '登録しました'
+      redirect_to @progress, notice: '登録しました'
     else
       render :new
     end
   end
 
   def show
-    @progress = Progress.find(params[:id])
+    tmp_progress = Progress.find(params[:id])
+    @sick = Sick.find(tmp_progress.sick_id)
+    # TODO 選択したprogress_idのページを初期表示したい
+    @progresses = @sick.progresses.page params[:page]
+    @comments = @sick.sick_comments.includes(:comment_by_user).order(:created_at)
   end
 
   def edit
