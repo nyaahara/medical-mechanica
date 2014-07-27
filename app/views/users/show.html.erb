@@ -1,5 +1,6 @@
 <div class="">
   <%=@user.nickname%>
+  <%= link_to '編集したい', edit_user_path(@user) %>
 </div>
 
 <%= @sicks.each do |sick| %>

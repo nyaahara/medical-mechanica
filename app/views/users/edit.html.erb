@@ -1,0 +1,19 @@
+<div class="">
+  <%=@user.nickname%>
+</div>
+
+<%= form_for(@user) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :birth %>
+    <%= f.date_field :birth, :class => 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :sex %>
+    <%= f.text_field :sex %>
+  </div>
+
+  <%= f.submit '変更！', :class => 'btn btn-primary'%>
+<% end %>
+
