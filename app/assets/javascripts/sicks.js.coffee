@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $ ->
-  $("canvas#all-over").on 'click', (e) ->
+  $("canvas.all-over").on 'click', (e) ->
 
     e.preventDefault
     canvas = $(e.target)
@@ -11,6 +11,7 @@ $ ->
     pageY = e.pageY || e.originalEvent.changedTouches[0].pageY
     x = pageX - canvas.position().left
     y = pageY - canvas.position().top
+    $('#modal-front-or-back')[0].value = canvas[0].id
     $('#modal-x')[0].value = x
     $('#modal-y')[0].value = y
     $('#modalAdd').modal('show')
@@ -29,6 +30,7 @@ $ ->
   ## adding part-detail. set values, and draw canvas and icon.
   $(document).on 'nested:fieldAdded', (e) ->
     part_detail = $(e.target)
+    part_detail.find(".frontOrBack")[0].value = $('#modal-front-or-back')[0].value
     part_detail.find(".pointX")[0].value = $('#modal-x')[0].value
     part_detail.find(".pointY")[0].value = $('#modal-y')[0].value
     part_detail.find(".progress-memo")[0].value = $('#modal-memo')[0].value
@@ -52,10 +54,17 @@ $ ->
   ## エンターキー押下でsubmitされるのを防ぐ
   $(document).on "keypress", "input:not(.allow_submit)", (event) -> event.which != 13
 
+
+  $('#comment').on 'shown.bs.modal', (e) ->
+    $('.modal-comment')[0].focus()
+
+  $('#recover_completely').on 'shown.bs.modal', (e) ->
+    $('#sick_recover_completely_comment')[0].focus()
+
 ############################################################################
 draw_all_over = (part_detail) ->
 
-  canvas = $("canvas#all-over")[0]
+  canvas = $("##{part_detail.find('.frontOrBack')[0].value}")[0]
   ctx = canvas.getContext('2d')
   pointX = part_detail.find(".pointX")[0].value
   pointY = part_detail.find(".pointY")[0].value
@@ -66,7 +75,7 @@ draw_all_over = (part_detail) ->
 ############################################################################
 clear_all_over = (part_detail) ->
 
-  canvas = $("canvas#all-over")[0]
+  canvas = $("##{part_detail.find('.frontOrBack')[0].value}")[0]
   ctx = canvas.getContext('2d')
   pointX = part_detail.find(".pointX")[0].value
   pointY = part_detail.find(".pointY")[0].value
@@ -79,6 +88,10 @@ clear_all_over = (part_detail) ->
 draw_part_icon = (part_detail) ->
 
   canvas = part_detail.find(".progress-canvas")[0]
+
+  # change background image
+  background = image_path("#{part_detail.find('.frontOrBack')[0].value}.jpg")
+  canvas.style.background = "url('{image_url}')".replace('{image_url}', background)
 
   ## half of canvas size
   half_of_canvas_height = canvas.height / 2

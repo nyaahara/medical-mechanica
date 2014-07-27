@@ -52,7 +52,7 @@ class ProgressesController < ApplicationController
   private
 
   def progress_params(sick)
-    permited = params.require(:progress).permit(:progress_at, :parts_attributes => [:memo, :x, :y, :_destroy])
+    permited = params.require(:progress).permit(:progress_at, :parts_attributes => [:memo, :front_or_back, :x, :y, :_destroy])
     permited[:user_id] = sick.owner_id
     permited[:parts_attributes].each do |part|
       part[1][:user_id] = sick.owner_id

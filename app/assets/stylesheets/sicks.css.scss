@@ -1,17 +1,26 @@
 // Place all the styles related to the sicks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-canvas#all-over {
+
+canvas.all-over{
+  background-repeat: no-repeat;
   position: relative;
-  background-color: silver;
-  background-image:url(image-path('head.png'));
+}
+
+canvas#front{
+  background-image:url(image-path('front.jpg'));
+}
+
+canvas#back{
+  background-image:url(image-path('back.jpg'));
 }
 
 .progress-canvas{
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
-  background-image:url(image-path('head.png'));
 }
 
 input, select, option, textarea {

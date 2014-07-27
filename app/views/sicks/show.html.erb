@@ -1,39 +1,33 @@
 <div class="">
-  <h1>
-    <%= @sick.owner.nickname %>さん
-  </h1>
+  <h3>
+    <%= link_to(@sick.owner) do %>
+      <%= @sick.owner.nickname %>
+    <% end %>
+    さんの症状
+  </h3>
   <div class="">
-    <%= @sick.created_at %>
-    <%= @sick.status %>
+    <%= @sick.progresses.first.progress_at.strftime('%Y/%m/%d %H:%M') %>〜
+    <% unless @sick.still_sick? %>
+      <%= @sick.progresses.last.progress_at.strftime('%Y/%m/%d %H:%M') %>
+    <% end %>
+  </div>
+  <div class="">
+    <% if @sick.still_sick? && @sick.created_by?(current_user) %>
+      <button
+        class="btn btn-primary btn-sm"
+        rel="popover" 
+        data-title="治ったボタン"
+        data-content="治ったことを皆に知らせて、治療方法を登録します。"
+        data-placement="right"
+        data-trigger="hover"
+        data-toggle="modal"
+        data-target="#recover_completely">
+        治った
+      </button>
+      <%= render partial: "modalComplete" %>
+    <% end %>
   </div>
 
-  <%= link_to(@sick.owner) do %>
-    ユーザをみる
-  <% end %>
-
-  <!-- TODO modalにしてどうやったら完治したのかを書く -->
-  <% if @sick.created_by?(current_user) & @sick.still_sick? %>
-   <button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#recover_completely">
-    完治しました
-   </button>
-<div class="modal fade" id="recover_completely" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true"> 
-  <div class="modal-dialog"> 
-    <div class="modal-content"> 
-      <div class="modal-header"> 
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-        <h4 class="modal-title" id="dialogHeader">何をしたら完治したか教えて下さい。</h4> 
-      </div> 
-    <div class="modal-body"> 
-      <%= form_for(@sick) do |f| %>
-        <%= f.text_area :recover_completely_comment %>
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <%= f.submit 'なおりました。',  class: 'btn btn-default', data: { disable_with: '作成中' } %>
-      <% end %>
-    </div> 
-    </div> 
-  </div> 
-</div>
-  <% end %>
 
 
   <% if @sick.recover_completely? %>
@@ -43,41 +37,34 @@
 </div>
 
 <%= paginate @progresses %> 
-
-
 <% @progresses.each do |progress| %>
   <div class="">
-    <%= link_to '編集する', edit_progress_path(progress) %>
+    <% if @sick.created_by?(current_user) %>
+      <%= link_to '編集', edit_progress_path(progress), :class => 'btn btn-default btn-sm'%>
+    <% end %>
+  </div>
+  <div style="display:none;" class="">
     <%= render partial: "shared/canvas" %>
     <%= render partial: "shared/drawPoint", locals: {data: progress} %>
-    <%= render partial: "shared/showDetails", locals: {data: progress} %>
   </div>
+    <%= render partial: "shared/showDetails", locals: {data: progress} %>
+  
 <% end %>
-
-
-<button class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#comment">
-  コメントする or アドバイスする
-</button>
-<div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="dialogHeader" aria-hidden="true"> 
-  <div class="modal-dialog"> 
-    <div class="modal-content"> 
-      <div class="modal-header"> 
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
-        <h4 class="modal-title" id="dialogHeader">もだるたいとる</h4> 
-      </div> 
-      <div class="modal-body"> 
-        <%= form_for(@sick.sick_comments.build, url: sick_sick_comments_path(@sick), remote:true) do |sf| %>
-          <%= sf.text_area :contents %>
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <%= sf.button 'コメントする', class: 'btn btn-default', data: { disable_with: '作成中' } %>
-        <% end %>
-      </div> 
-    </div> 
-  </div> 
+  <div class="btn-group col-xs-12">
+  <button class="btn btn-default btn-block" data-toggle="modal" data-target="#comment">
+    コメントする
+  </button>
 </div>
 
-<% @comments.each do|comment| %>
-  <div><%= comment.id %> ん？<%= comment.comment_by_user.nickname %> :<%= comment.contents %></div>
-<% end %>
-どうして、最後に空のcommentがループされるんだろ？
 
+<%= render partial: "modalComment" %>
+
+<% @comments.each do|comment| %>
+  <div><%= comment.id %><%= comment.comment_by_user.nickname %> :<%= comment.contents %></div>
+<% end %>
+
+<script type="text/javascript">
+$(function() {
+      $('[rel=popover]').popover();
+});
+</script>

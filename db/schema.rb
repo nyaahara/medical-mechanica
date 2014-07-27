@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714144102) do
+ActiveRecord::Schema.define(version: 20140727064559) do
 
   create_table "parts", force: true do |t|
-    t.integer  "user_id",     null: false
-    t.integer  "sick_id",     null: false
-    t.integer  "progress_id", null: false
+    t.integer  "user_id",       null: false
+    t.integer  "sick_id",       null: false
+    t.integer  "progress_id",   null: false
     t.string   "memo"
-    t.integer  "x",           null: false
-    t.integer  "y",           null: false
+    t.integer  "x",             null: false
+    t.integer  "y",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "front_or_back"
   end
 
   add_index "parts", ["progress_id"], name: "index_parts_on_progress_id", using: :btree
