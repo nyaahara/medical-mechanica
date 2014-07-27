@@ -2,6 +2,13 @@ class ProgressesController < ApplicationController
 
   before_action :authenticate
 
+  def new
+    now = Time.zone.now
+    @progress = current_user.progresses.build
+    @progress.progress_at = now - now.sec
+    @still_sicks = Sick.where(:owner_id => current_user.id, :status => 0)
+  end
+
   def create
     
     # 親のsickがなければ、新しく作ります。
