@@ -26,6 +26,7 @@
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to 'new 病気', new_progress_path %></li>
           <% if logged_in? %>
+            <li><%= link_to 'ユーザ編集', edit_user_path(current_user) %></li>
             <li><%= link_to 'ログアウト', logout_path %></li>
           <% else %>
             <li><%= link_to 'Twitterでログイン', '/auth/twitter' %></li>
