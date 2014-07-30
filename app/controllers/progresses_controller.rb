@@ -65,12 +65,12 @@ class ProgressesController < ApplicationController
     @sick = @progress.sick
     @progress.destroy!
 
-#### ここのrenderがうまくいってません。(7/29 0:13 寝る！）
-#### 早く起きれなくて手が着かなかった。。。にゅーー！（7/29 7:35　会社いく)
-## Sicks#showが無いって怒られます。
-## Sicks#showを、やっぱり作るべきなのでは？？？？
-
-    redirect_to @sick, notice: '削除しました'
+    if @sick.progresses.length == 0
+      @sick.destroy!
+      redirect_to root_path, notice: '削除しました'
+    else
+      redirect_to @sick.progresses.first, notice: '削除しました'
+    end
   end
 
   private
