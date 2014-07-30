@@ -13,4 +13,10 @@ class SicksController < ApplicationController
     params.require(:sick).permit(:recover_completely_comment)
   end
 
+  def destroy
+    @sick = Sick.find(params[:id])
+    @sick.destroy!
+    redirect_to root_path, notice: '削除しました'
+  end
+
 end

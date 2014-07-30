@@ -2,6 +2,7 @@
   へんシューして下さい。
 </div>
 
+<%= link_to '削除', progress_path(@progress), method: :delete, data:{ confirm: '本当に削除しますか？'}%>
 <%= render partial: "shared/messages", locals: {err: @progress.errors} %>
 <%= render partial: "shared/modal" %>
 

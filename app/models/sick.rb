@@ -1,7 +1,7 @@
 class Sick < ActiveRecord::Base
-  has_many :progresses
-  has_many :parts
-  has_many :sick_comments
+  has_many :progresses, dependent: :destroy
+  has_many :parts, dependent: :destroy
+  has_many :sick_comments, dependent: :destroy
   belongs_to :owner, class_name: 'User'
 
   before_save :default_values

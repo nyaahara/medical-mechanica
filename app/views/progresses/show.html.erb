@@ -12,19 +12,22 @@
     <% end %>
   </div>
   <div class="">
-    <% if @sick.still_sick? && @sick.created_by?(current_user) %>
-      <button
-        class="btn btn-primary btn-sm"
-        rel="popover" 
-        data-title="治ったボタン"
-        data-content="治ったことを皆に知らせて、治療方法を登録します。"
-        data-placement="right"
-        data-trigger="hover"
-        data-toggle="modal"
-        data-target="#recover_completely">
-        治った
-      </button>
-      <%= render partial: "modalComplete" %>
+    <% if @sick.created_by?(current_user) %>
+      <% if @sick.still_sick? %>
+        <button
+          class="btn btn-primary btn-sm"
+          rel="popover" 
+          data-title="治ったボタン"
+          data-content="治ったことを皆に知らせて、治療方法を登録します。"
+          data-placement="right"
+          data-trigger="hover"
+          data-toggle="modal"
+          data-target="#recover_completely">
+          治った
+        </button>
+        <%= render partial: "modalComplete" %>
+      <% end %>
+      <%= link_to '削除', sick_path(@sick), method: :delete, data:{ confirm: '本当に削除しますか？'}%>
     <% end %>
   </div>
 
