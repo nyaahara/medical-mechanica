@@ -15,5 +15,6 @@
   </div>
 
   <%= f.submit '変更！', :class => 'btn btn-primary'%>
+  <%= button_to '退会する', user_path(@user), method: :delete, :class => 'btn btn-danger', data:{ confirm: '本当に退会しますか？'}%>
 <% end %>
 

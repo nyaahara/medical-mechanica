@@ -68,6 +68,9 @@
         @<%= comment.comment_by_user.nickname %><br/>
         <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %> 
       </h4>
+      <% if comment.created_by?(current_user) %>
+        <%= button_to 'コメントを削除する', sick_sick_comment_path(@sick,comment), method: :delete, :class => 'btn btn-danger', data:{ confirm: 'コメントを削除しますか？'}%>
+      <% end %>
       <% if comment.is_owner_comment? %>
         これは、オーナーのコメントですよ。
       <% end %>

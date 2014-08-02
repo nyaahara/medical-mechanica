@@ -13,4 +13,11 @@ class SickCommentsController < ApplicationController
     end
   end
 
+  def destroy
+    @sick_comment = SickComment.find(params[:id])
+    @sick = @sick_comment.sick
+    @sick_comment.destroy!
+    redirect_to @sick.progresses.first, notice: 'コメントを削除しました。'
+  end
+
 end

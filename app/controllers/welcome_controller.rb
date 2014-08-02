@@ -1,8 +1,7 @@
 class WelcomeController < ApplicationController
   def index
                                                       # TODO desc
-                                                          # TODO limit 
-    @progresses = Progress.includes(:sick).where(1).order(:created_at)
+    @progresses = Progress.joins(:sick,:parts,:user).order(:created_at).take(50)
     @users = User.where(1).order(:created_at)
   end
 end

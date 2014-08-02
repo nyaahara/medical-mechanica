@@ -8,6 +8,12 @@ class SickComment < ActiveRecord::Base
     is_owner_comment == 1
   end
 
+  def created_by?(user)
+    return false unless user
+    comment_by_user_id == user.id
+  end
+    
+
   def default_values
     parent = Sick.find(self.sick_id)
     self.user_id = parent.owner_id ||= 0

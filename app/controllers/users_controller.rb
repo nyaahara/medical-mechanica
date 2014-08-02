@@ -20,6 +20,13 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    @user = current_user
+    @user.destroy!
+    reset_session
+    redirect_to root_path, notice: '退会しました'
+  end
   
   private 
 
