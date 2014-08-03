@@ -49,8 +49,6 @@ class SymptomsController < ApplicationController
     permited = params.require(:symptom).permit(:progress_at, :parts_attributes => [:memo, :front_or_back, :x, :y, :_destroy])
     permited[:parts_attributes].each do | part |
       part[1][:user_id] = current_user.id
-      part[1][:progress_id] = 1 ## TODO REMOVE
-      part[1][:sick_id] = 1 ## TODO REMOVE
     end
     permited
   end

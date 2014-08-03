@@ -1,16 +1,6 @@
 Rails.application.routes.draw do
   resources :users do
-    resources :symptoms do
-      resources :parts
-    end
-  end
-
-  resources :progresses do
-    resources :parts
-  end
-
-  resources :sicks do
-    resources :sick_comments
+    resources :symptoms
   end
 
   root to: 'welcome#index'

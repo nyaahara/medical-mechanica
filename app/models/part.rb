@@ -1,7 +1,6 @@
 class Part < ActiveRecord::Base
   belongs_to :user
-  belongs_to :sick
-  belongs_to :progress
+  belongs_to :symptom
   
   FRONT_OR_BACK = %w(front back)
   enum front_or_back: FRONT_OR_BACK
