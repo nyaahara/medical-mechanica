@@ -1,0 +1,29 @@
+<h3>
+  <%= link_to(@owner) do %>
+    <%= @owner.nickname %>
+  <% end %>
+  さんの症状
+</h3>
+
+<% @symptoms.each do |symptom| %>
+  <div style="display:none;" class="">
+    <%= render partial: "canvas" %>
+    <%= render partial: "drawPoint", locals: {user: @owner, data: symptom} %>
+  </div>
+
+  <div style="clear:both">
+    <%= symptom.created_at.strftime('%Y/%m/%d %H:%M') %>
+    <% if symptom.created_by?(current_user) %>
+      <%= link_to edit_user_symptom_path(current_user,symptom) do %>
+        編集
+      <% end %>
+      <%= link_to user_symptom_path(current_user,symptom), method: :delete, data: {confirm: '本当に削除しますか？'} do %>
+        削除
+      <% end %>
+    <% end %>
+  </div>
+  <%= render partial: "showDetails", locals: {data: symptom} %>
+
+  <div style="clear:both"></div>
+  
+<% end %>

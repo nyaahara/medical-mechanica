@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :sick_comments, class_name: 'SickComment', foreign_key: :comment_by_user_id
   has_many :sick_comments
   has_many :progresses
+  has_many :symptom
   has_many :parts
 
   validates :provider, presence: true

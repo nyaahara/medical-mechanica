@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727064559) do
+ActiveRecord::Schema.define(version: 20140803125111) do
 
   create_table "parts", force: true do |t|
     t.integer  "user_id",       null: false
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 20140727064559) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "front_or_back"
+    t.integer  "symptom_id"
   end
 
   add_index "parts", ["progress_id"], name: "index_parts_on_progress_id", using: :btree
   add_index "parts", ["sick_id"], name: "index_parts_on_sick_id", using: :btree
+  add_index "parts", ["symptom_id"], name: "index_parts_on_symptom_id", using: :btree
   add_index "parts", ["user_id", "sick_id", "progress_id"], name: "index_parts_on_user_id_and_sick_id_and_progress_id", using: :btree
   add_index "parts", ["user_id"], name: "index_parts_on_user_id", using: :btree
 
@@ -65,6 +67,14 @@ ActiveRecord::Schema.define(version: 20140727064559) do
   end
 
   add_index "sicks", ["owner_id"], name: "index_sicks_on_owner_id", using: :btree
+
+  create_table "symptoms", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "symptoms", ["user_id"], name: "index_symptoms_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider",   null: false

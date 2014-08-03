@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    resources :symptoms do
+      resources :parts
+    end
+  end
 
   resources :progresses do
     resources :parts
