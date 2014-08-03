@@ -46,7 +46,7 @@ class SymptomsController < ApplicationController
   private
 
   def strong_params
-    permited = params.require(:symptom).permit(:progress_at, :parts_attributes => [:memo, :front_or_back, :x, :y, :_destroy])
+    permited = params.require(:symptom).permit(:parts_attributes => [:memo, :front_or_back, :x, :y, :_destroy])
     permited[:parts_attributes].each do | part |
       part[1][:user_id] = current_user.id
     end

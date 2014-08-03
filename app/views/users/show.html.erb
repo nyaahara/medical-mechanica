@@ -3,22 +3,3 @@
   <%= link_to '編集したい', edit_user_path(@user) %>
 </div>
 
-<%= @sicks.each do |sick| %>
-  <div class="">
-        <%= link_to(sick) do%>
-          sick group:
-          <%= sick.created_at || 'no time' %>::
-          <%= sick.status %>
-        <% end %>
-    <% sick.progresses.each do |progress| %>
-        <%= link_to(progress) do%>
-          <%= progress.progress_at || 'no time' %>
-        <% end %>
-
-        <% progress.parts.each do |part| %>
-          <%= part.memo %>
-        <% end %>
-    <% end %>
-  </div>
-<% end %>
-
