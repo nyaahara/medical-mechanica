@@ -15,4 +15,3 @@
 //= require bootstrap.min
 //= require_tree .
 //= require jquery_nested_form
-//= require bootstrap-slider
