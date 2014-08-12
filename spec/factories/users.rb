@@ -6,6 +6,5 @@ FactoryGirl.define do
     sequence(:uid) { |i| "uid#{i}" }
     sequence(:nickname) { |i| "nickname#{i}" }
     sequence(:image_url) { |i| "http://example.com/image#{i}.jpg" }
-    sex { rand(0..1) }
   end
 end

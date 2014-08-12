@@ -3,6 +3,8 @@ class Symptom < ActiveRecord::Base
   accepts_nested_attributes_for :parts, allow_destroy: true
   belongs_to :user
 
+  validates :parts, presence: true
+
   def created_by?(user)
     return false unless user
     user_id == user.id

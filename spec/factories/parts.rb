@@ -2,13 +2,9 @@
 
 FactoryGirl.define do
   factory :part do
-    user nil
-    sick nil
-    progress nil
-    part ""
-    kind ""
-    level ""
-    x ""
-    y ""
+    front_or_back 0
+    x 50
+    y 50
+    sequence(:memo) { |i| "memo#{i}" }
   end
 end
