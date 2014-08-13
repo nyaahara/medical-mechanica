@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140803041919) do
+ActiveRecord::Schema.define(version: 20140812155847) do
 
   create_table "parts", force: true do |t|
-    t.integer  "user_id",       null: false
     t.integer  "symptom_id",    null: false
     t.string   "memo"
     t.integer  "x",             null: false
@@ -25,7 +24,6 @@ ActiveRecord::Schema.define(version: 20140803041919) do
   end
 
   add_index "parts", ["symptom_id"], name: "index_parts_on_symptom_id", using: :btree
-  add_index "parts", ["user_id"], name: "index_parts_on_user_id", using: :btree
 
   create_table "symptoms", force: true do |t|
     t.integer  "user_id"

@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
 
   has_many :symptom
-  has_many :parts
 
   validates :provider, presence: true
   validates :uid, presence: true

@@ -51,12 +51,7 @@ class SymptomsController < ApplicationController
     
     # 何も入力していない場合にエラーが出るため、strong_parameterしない。
     return unless params.include?('symptom')
-
-    permited = params.require(:symptom).permit(:parts_attributes => [:memo, :front_or_back, :x, :y, :_destroy])
-    permited[:parts_attributes].each do | part |
-      part[1][:user_id] = current_user.id
-    end
-    permited
+    params.require(:symptom).permit(:parts_attributes => [:memo, :front_or_back, :x, :y, :_destroy])
   end
 
 end

@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Part, :type => :model do
-  describe '#user' do
-    it { should belong_to(:user) }
-  end
 
   describe '#symptom' do
     it { should belong_to(:symptom) }

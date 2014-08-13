@@ -3,11 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
 
   describe '#symptom' do
-    it { should have_many(:symptoms) }
-  end
-
-  describe '#part' do
-    it { should have_many(:parts) }
+    it { should have_many(:symptom) }
   end
 
   describe User do

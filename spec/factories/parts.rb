@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :part do
-    front_or_back 0
+    front_or_back "back"
     x 50
     y 50
     sequence(:memo) { |i| "memo#{i}" }

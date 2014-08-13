@@ -1,5 +1,4 @@
 class Part < ActiveRecord::Base
-  belongs_to :user
   belongs_to :symptom
   
   FRONT_OR_BACK = %w(front back)

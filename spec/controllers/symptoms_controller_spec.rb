@@ -111,7 +111,7 @@ RSpec.describe SymptomsController, :type => :controller do
        
       context 'パラメータが正しいとき' do
 
-        part_params = { parts_attributes: {aaa: FactoryGirl.attributes_for(:part)} }
+        part_params = { parts_attributes: {"1407946283982" => FactoryGirl.attributes_for(:part)} }
         subject { post :create, user_id: alice.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
 
         it 'Symptomレコードが1件増えること' do
@@ -126,7 +126,7 @@ RSpec.describe SymptomsController, :type => :controller do
        
       context 'パラメータが不正なとき' do
 
-        part_params = { parts_attributes: {aaa: nil} }
+        part_params = { parts_attributes: {"1407946283982" => nil} }
         subject { post :create, user_id: alice.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
 
         it 'Symptomレコードの件数に変化がないこと' do
