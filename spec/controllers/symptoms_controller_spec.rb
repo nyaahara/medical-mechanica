@@ -94,8 +94,6 @@ RSpec.describe SymptomsController, :type => :controller do
     end
   end
 
-
-
   describe 'POST #create' do
     let!(:alice){ FactoryGirl.create :user }
 
@@ -140,5 +138,45 @@ RSpec.describe SymptomsController, :type => :controller do
       end
     end
   end
+  
+  describe 'GET #edit' do
+    let!(:alice){ FactoryGirl.create :user }
+    let!(:symptom) { FactoryGirl.create :symptom, user: alice }
+
+    context '未ログインユーザがアクセスしたとき' do
+      before { get :edit, user_id:alice.id, id: symptom.id }
+      it_should_behave_like '認証が必要なページ'
+    end
+
+
+    context 'ログインユーザかつイベントを作成したユーザがアクセスしたとき' do
+      before do
+        login(alice)
+        get :edit, user_id:alice.id, id: symptom.id
+      end
+
+      it '@eventに、リクエストしたEventオブジェクトが格納されていること' do
+        expect(assigns(:symptom)).to eq(symptom)
+      end
+
+      it 'editテンプレートをrenderしていること' do
+        expect(response).to render_template :edit
+      end
+    end
+
+    context 'ログインユーザかつイベントを作成していないユーザがアクセスしたとき' do
+      let!(:bob){ FactoryGirl.create :user }
+      before do
+        login(bob)
+        get :edit, user_id:alice.id, id: symptom.id
+      end
+
+      it 'error404テンプレートをrenderしていること' do
+        expect(response).to render_template :error404
+      end
+    end
+  end
+
+
 
 end

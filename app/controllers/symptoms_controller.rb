@@ -21,7 +21,7 @@ class SymptomsController < ApplicationController
   end
 
   def edit
-    @symptom = Symptom.find(params[:id])
+    @symptom = current_user.symptom.find(params[:id])
   end
 
   def update

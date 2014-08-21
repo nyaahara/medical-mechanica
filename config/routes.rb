@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
   # as: :logout とすることで、logout_pathとして参照できる。
   get '/logout' => 'sessions#destroy', as: :logout
+
+  match '*path' => 'application#error404', via: :all
 end
