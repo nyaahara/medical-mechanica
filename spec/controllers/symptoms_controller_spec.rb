@@ -215,11 +215,13 @@ RSpec.describe SymptomsController, :type => :controller do
           #end
           # {:front_or_back=>"back", :x=>50, :y=>50, :memo=>"memo75"}
 
-          p "-------"
+          p '-------'
           # part_params = { parts_attributes: {"1407946283982" => FactoryGirl.attributes_for(:part)} }
           # subject { post :create, user_id: alice.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
           #patch :update, user: symptom.id, symptom: attributes_for(:symptom, name: 'Rails勉強会', place: '都内某所', content: 'Railsを勉強しよう', start_time: Time.zone.local(2014, 1, 1, 10, 0), end_time: Time.zone.local(2014, 1, 1, 19, 0))
-          
+          #paaa:w
+
+
           symptom.parts[0][:front_or_back]="front"
           symptom.parts[0][:x]="5"
           symptom.parts[0][:y]="74"
