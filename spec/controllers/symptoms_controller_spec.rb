@@ -155,7 +155,7 @@ RSpec.describe SymptomsController, :type => :controller do
         get :edit, user_id:alice.id, id: symptom.id
       end
 
-      it '@eventに、リクエストしたEventオブジェクトが格納されていること' do
+      it '@symptomに、リクエストしたEventオブジェクトが格納されていること' do
         expect(assigns(:symptom)).to eq(symptom)
       end
 
@@ -178,5 +178,97 @@ RSpec.describe SymptomsController, :type => :controller do
   end
 
 
+  describe 'PATCH #update' do
+    let!(:alice){ FactoryGirl.create :user }
+    let!(:symptom) { FactoryGirl.create :symptom, user: alice }
+
+    context '未ログインユーザがアクセスしたとき' do
+      before {
+        patch :update, user_id:alice.id, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom)
+      }
+      it_should_behave_like '認証が必要なページ'
+    end
+
+########## ここまでコード書いた。下はコピペのまんま
+
+    context 'ログインユーザかつイベントを作成したユーザがアクセスしたとき' do
+      before { login(alice) }
+
+      context 'かつパラメータが正しいとき' do
+        before do
+          p "pppp"
+          # p FactoryGirl.attributes_for(:symptom)
+          #p symptom
+          FactoryGirl.attributes_for(:symptom)[:parts].each do |paaa|
+            p paaa
+          end
+
+          symptom.parts.each do |paaa|
+            p paaa
+          end
+          
+          p FactoryGirl.attributes_for(:part)
+
+          # p symptom.to_json
+          #symptom.parts.each do |paaa|
+            #p paaa.to_json
+          #end
+          # {:front_or_back=>"back", :x=>50, :y=>50, :memo=>"memo75"}
+
+          p "-------"
+          # part_params = { parts_attributes: {"1407946283982" => FactoryGirl.attributes_for(:part)} }
+          # subject { post :create, user_id: alice.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
+          #patch :update, user: symptom.id, symptom: attributes_for(:symptom, name: 'Rails勉強会', place: '都内某所', content: 'Railsを勉強しよう', start_time: Time.zone.local(2014, 1, 1, 10, 0), end_time: Time.zone.local(2014, 1, 1, 19, 0))
+          
+          symptom.parts[0][:front_or_back]="front"
+          symptom.parts[0][:x]="5"
+          symptom.parts[0][:y]="74"
+          symptom.parts[0][:memo]="メモ"
+
+          patch :update, user_id:alice.id, id: symptom.id, symptom: symptom
+          # patch :update, user_id:alice.id, id: symptom.id
+        end
+
+        it 'Eventレコードが正しく変更されていること' do
+          p symptom
+          symptom.reload
+          p symptom
+          symptom.parts.each do |paaa|
+            p paaa
+          end
+          p "afewahg;oiawjef"
+          expect(symptom.parts[0].front_or_back).to eq('front')
+        end
+
+        it '@symptomのshowアクションにリダイレクトすること' do
+          expect(response).to redirect_to(event_path(assigns[:symptom]))
+        end
+      end
+
+      context 'かつパラメータが不正なとき' do
+        it 'Eventレコードが変更されていないこと' do
+          expect { patch :update, id: symptom.id, symptom: attributes_for(:symptom, name: '', place: '都内某所', content: 'Railsを勉強しよう', start_time: Time.zone.local(2014, 1, 1, 10, 0), end_time: Time.zone.local(2014, 1, 1, 19, 0)) }.not_to change { symptom.reload } 
+        end
+
+        it 'editテンプレートをrenderしていること' do
+          patch :update, id: symptom.id, symptom: attributes_for(:symptom, name: '', place: '都内某所', content: 'Railsを勉強しよう', start_time: Time.zone.local(2014, 1, 1, 10, 0), end_time: Time.zone.local(2014, 1, 1, 19, 0))
+          expect(response).to render_template :edit
+        end
+      end
+    end
+
+    context 'ログインユーザかつイベントを作成していないユーザがアクセスしたとき' do
+      let!(:not_owner) { create :user }
+
+      before do
+        login(not_owner)                                                                                                                                                                                    
+        patch :update, id: symptom.id, symptom: attributes_for(:symptom)
+      end
+
+      it 'error404テンプレートをrenderしていること' do
+        expect(response).to render_template :error404
+      end
+    end
+  end
 
 end
