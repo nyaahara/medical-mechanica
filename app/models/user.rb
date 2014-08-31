@@ -1,16 +1,11 @@
 class User < ActiveRecord::Base
 
-  has_many :has_sick, class_name: 'Sick', foreign_key: :owner_id
-  has_many :sick_comments, class_name: 'SickComment', foreign_key: :comment_by_user_id
-  has_many :sick_comments
-  has_many :progresses
-  has_many :parts
+  has_many :symptom
 
   validates :provider, presence: true
   validates :uid, presence: true
   validates :nickname, length: { maximum: 50 }
   validates :image_url, length: { maximum: 255 }
- # validates :sex, inclusion: { in: 0..1 }, presence: false
   
   def self.find_or_create_from_auth_hash(auth_hash)
     provider = auth_hash[:provider]

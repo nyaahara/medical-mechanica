@@ -75,11 +75,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    bootstrap-glyphicons (0.0.1)
-      railties (>= 3.0)
-      sass (>= 3.2)
-    bootstrap-slider-rails (1.9.0)
-      railties (>= 3.2, < 5.0)
     builder (3.2.2)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -100,8 +95,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
-    composite_primary_keys (7.0.2)
-      activerecord (~> 4.1.0)
     database_cleaner (1.2.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
@@ -211,12 +204,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-glyphicons
-  bootstrap-slider-rails
   capybara (~> 2.2.1)
   carrierwave (~> 0.10.0)
   coffee-rails (~> 4.0.0)
-  composite_primary_keys
   database_cleaner (~> 1.2.0)
   factory_girl_rails (~> 4.4.1)
   jbuilder (~> 2.0)

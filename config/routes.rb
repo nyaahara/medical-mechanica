@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
-  resources :users
-
-  resources :progresses do
-    resources :parts
-  end
-
-  resources :sicks do
-    resources :sick_comments
+  resources :users do
+    resources :symptoms
   end
 
   root to: 'welcome#index'
@@ -14,4 +8,6 @@ Rails.application.routes.draw do
 
   # as: :logout とすることで、logout_pathとして参照できる。
   get '/logout' => 'sessions#destroy', as: :logout
+
+  match '*path' => 'application#error404', via: :all
 end

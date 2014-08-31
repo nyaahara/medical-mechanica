@@ -9,6 +9,22 @@
   <%= csrf_meta_tags %>
 </head>
 
+<style>
+
+.navbar-brand{
+   letter-spacing: 0.5em;    
+}
+
+.navbar-brand .head{
+  margin-top:3px;
+  transform: rotate(50deg);
+  -moz-transform: rotate(50deg);
+  -webkit-transform: rotate(50deg);
+  float:left
+  font-size:400px;
+}
+
+</style>
 <body>
   <header class="navbar navbar-default" role="navigation">
     <div class="container">
@@ -19,19 +35,25 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to 'Medical Mechanica', root_path, class: 'navbar-brand' %>
+        <%= link_to root_path, class: 'navbar-brand' do %>
+          <div class="head">6</div>ix<span class="tail">U</span>
+        <% end %>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to 'new 病気', new_progress_path %></li>
           <% if logged_in? %>
-            <li><%= link_to 'ユーザ編集', edit_user_path(current_user) %></li>
+          <li><%= link_to '症状を登録する', new_user_symptom_path(current_user) %></li>
+            <li><%= link_to  user_symptoms_path(current_user) do %>
+                <%= image_tag current_user.image_url %>
+              <% end %>
+            </li>
             <li><%= link_to 'ログアウト', logout_path %></li>
           <% else %>
             <li><%= link_to 'Twitterでログイン', '/auth/twitter' %></li>
           <% end %>
         </ul>
+      </div>
     </div>
   </header>
   <div class="container">
@@ -47,6 +69,32 @@
     <% end %>
     <%= yield %>
   </div>
-
+<style>
+.footer {
+  text-align: center;
+  padding: 30px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
+  background-color: #f5f5f5;
+}
+</style>
+  <footer class="navbar navbar-default" role="navigation">
+    <div class="container">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <% if logged_in? %>
+          <li><%= link_to '症状を登録する', new_user_symptom_path(current_user) %></li>
+            <li><%= link_to  user_symptoms_path(current_user) do %>
+                <%= image_tag current_user.image_url %>
+              <% end %>
+            </li>
+            <li><%= link_to 'ログアウト', logout_path %></li>
+          <% else %>
+            <li><%= link_to 'Twitterでログイン', '/auth/twitter' %></li>
+          <% end %>
+        </ul>
+      </div></div>
+  </footer>
+  
 </body>
 </html>
