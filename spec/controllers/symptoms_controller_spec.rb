@@ -240,4 +240,45 @@ RSpec.describe SymptomsController, :type => :controller do
     end
   end
 
+  describe 'DELETE #destroy' do
+    let!(:alice){ FactoryGirl.create :user }
+    let!(:symptom) { FactoryGirl.create :symptom, user: alice }
+
+    context '未ログインユーザがアクセスしたとき' do
+      before {
+        delete :destroy, user_id:alice.id, id: symptom.id
+      }
+      it_should_behave_like '認証が必要なページ'
+    end
+
+    context 'ログインユーザかつイベントを作成したユーザがクセスしたとき' do
+      before { login(alice) }
+
+      it 'Symptomレコードが1件減っていること' do
+        expect{ delete :destroy, user_id: alice.id, id: symptom.id }.
+            to change { Symptom.count }.by(-1)
+      end
+
+      it 'indexテンプレートをrenderしていること' do
+        delete :destroy, user_id: alice.id, id: symptom.id
+        expect(response).to redirect_to(:action => :index, :user_id => assigns(:symptom).id,
+                                       :notice => '削除しました')
+      end
+    end
+
+    context 'ログインユーザかつイベントを作成していないユーザがクセスしたとき' do
+      let!(:not_owner) { FactoryGirl.create :user }
+      before { login(not_owner) }
+
+      it 'Symptomレコードが減っていないこと' do
+        expect{ delete :destroy, user_id: alice.id, id: symptom.id }.
+            not_to change { Symptom.count }
+      end
+
+      it 'error404テンプレートをrenderしていること' do
+        delete :destroy, user_id: alice.id, id: symptom.id
+        expect(response).to render_template :error404
+      end
+    end
+  end
 end

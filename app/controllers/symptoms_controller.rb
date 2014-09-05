@@ -46,7 +46,7 @@ class SymptomsController < ApplicationController
   end
 
   def destroy
-    @symptom = Symptom.find(params[:id])
+    @symptom = current_user.symptom.find(params[:id])
     if @symptom.destroy!
       redirect_to action: 'index', notice: '削除しました'
     end
