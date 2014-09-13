@@ -25,12 +25,20 @@ class SymptomsController < ApplicationController
   end
 
   def update
-    @symptom = Symptom.find(params[:id])
+    @symptom = current_user.symptom.find(params[:id])
     # 保存されたpartsを一旦削除する
-    @symptom.parts.each do |p|
-      p.destroy!
-    end
-    if @symptom.update(strong_params)
+    @symptom.parts.each {|item| item.destroy!}
+
+    # 入力されたpartが空の場合はdestroyする
+    param = strong_params
+    return destroy unless param
+    return destroy unless param.include?('parts_attributes')
+    return destroy if param[:parts_attributes].flatten.select do |item|
+      item.class != 'String' &&
+          item['_destroy'] == 'false'
+    end.length == 0
+
+    if @symptom.update(param)
       redirect_to action: 'index', notice: '更新しました'
     else
       render :edit
@@ -38,7 +46,7 @@ class SymptomsController < ApplicationController
   end
 
   def destroy
-    @symptom = Symptom.find(params[:id])
+    @symptom = current_user.symptom.find(params[:id])
     if @symptom.destroy!
       redirect_to action: 'index', notice: '削除しました'
     end

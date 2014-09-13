@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate
+  before_action :authenticate, except: :show
+  before_action :user_self?, except: :show
+
 
   def show
     owner_id = params[:id]
@@ -7,14 +9,13 @@ class UsersController < ApplicationController
   end
 
   def edit
-    owner_id = params[:id]
-    @user = User.find(owner_id)
+    @user = current_user
   end
 
   def update
-    @user = current_user    
+    @user = current_user
     if @user.update(user_params)
-      redirect_to @user, notice: '更新しました'
+      redirect_to action: 'show', notice: '更新しました'
     else
       render :edit
     end
@@ -27,10 +28,14 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: '退会しました'
   end
   
-  private 
+  private
 
   def user_params
     params.require(:user).permit(:birth,:sex)
+  end
+
+  def user_self?
+    not_found unless current_user.id.to_s == params[:id]
   end
 
 end

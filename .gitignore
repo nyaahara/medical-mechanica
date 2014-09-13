@@ -7,6 +7,12 @@
 # Ignore bundler config.
 /.bundle
 
+# IntelliJ IDEA
+.idea/*
+railways.cache
+out/*
+medical-mechanica.iml
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
