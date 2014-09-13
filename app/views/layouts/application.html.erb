@@ -44,7 +44,7 @@
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
           <li><%= link_to '症状を登録する', new_user_symptom_path(current_user) %></li>
-            <li><%= link_to  user_symptoms_path(current_user) do %>
+            <li><%= link_to  edit_user_path(current_user) do %>
                 <%= image_tag current_user.image_url %>
               <% end %>
             </li>
