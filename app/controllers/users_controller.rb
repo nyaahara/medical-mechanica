@@ -15,10 +15,9 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to action: 'edit', notice: '更新しました'
-    else
-      render :edit
+      flash.now[:notice] = '更新しました'
     end
+    render action: 'edit'
   end
 
   def destroy
