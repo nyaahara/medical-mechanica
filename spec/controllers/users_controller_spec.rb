@@ -112,8 +112,8 @@ RSpec.describe UsersController, :type => :controller do
           expect(alice.sex).not_to eq (alice.reload.sex)
         end
 
-        it '@userのshowアクションにリダイレクトすること' do
-          expect(response).to redirect_to(:action => :show, :id => assigns(:user).id,
+        it '@userのeditアクションにリダイレクトすること' do
+          expect(response).to redirect_to(:action => :edit, :id => assigns(:user).id,
                                           :notice => '更新しました')
         end
       end
