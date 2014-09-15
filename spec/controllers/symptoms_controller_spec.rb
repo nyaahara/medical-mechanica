@@ -3,68 +3,6 @@ require 'spec_helper'
 
 RSpec.describe SymptomsController, :type => :controller do
   
-  describe 'GET #index' do
-    let!(:alice){ FactoryGirl.create :user }
-    let!(:bob){ FactoryGirl.create :user }
-    let!(:symptom){ FactoryGirl.create :symptom, user: alice }
-
-    context 'symptomのownerがアクセスしたとき' do
-      before do
-        login(alice)
-        get :index, user_id:alice.id
-      end
-
-      it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
-        expect(assigns(:owner)).to eq(alice)
-      end 
-
-      it '@symptoms に、ownerのsymptomが格納されていること' do
-        expect(assigns(:symptoms)).to match_array([symptom])
-      end
-
-      it 'showテンプレートをrenderしていること' do
-        expect(response).to render_template :index
-      end
-    end
-
-    context 'symptomのowner以外がアクセスしたとき' do
-      before do
-        login(bob)
-        get :index, user_id:alice.id
-      end
-
-      it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
-        expect(assigns(:owner)).to eq(alice)
-      end 
-
-      it '@symptoms に、ownerのsymptomが格納されていること' do
-        expect(assigns(:symptoms)).to match_array([symptom])
-      end
-
-      it 'showテンプレートをrenderしていること' do
-        expect(response).to render_template :index
-      end
-    end
-
-    context 'guestがアクセスしたとき' do
-      before do
-        get :index, user_id:alice.id
-      end
-
-      it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
-        expect(assigns(:owner)).to eq(alice)
-      end 
-
-      it '@symptoms に、ownerのsymptomが格納されていること' do
-        expect(assigns(:symptoms)).to match_array([symptom])
-      end
-
-      it 'showテンプレートをrenderしていること' do
-        expect(response).to render_template :index
-      end
-    end
-  end
-  
   describe 'GET #new' do
 
     let!(:alice){ FactoryGirl.create :user }
