@@ -9,9 +9,15 @@
     <%= image_tag symptom.user.image_url %>
   </div>
   <div class="">
-    <%= link_to user_symptoms_path(symptom.user) do %>
-      <%= symptom.user.nickname %>
-    <% end %>
+      <% if symptom.created_by?(current_user) %>
+        <%= link_to edit_user_path(symptom.user) do %>
+              <%= symptom.user.nickname %>
+        <% end %>
+      <% else %>
+          <%= link_to user_path(symptom.user) do %>
+              <%= symptom.user.nickname %>
+          <% end %>
+      <% end %>
     さんが新しい症状を登録しました。
   </div>
   <%= symptom.created_at.strftime('%Y/%m/%d %H:%M') %>
