@@ -15,11 +15,6 @@ class SymptomsController < ApplicationController
     end
   end
 
-  def index
-    @owner = User.find(params[:user_id])
-    @symptoms = Symptom.where(:user_id => params[:user_id])
-  end
-
   def edit
     @symptom = current_user.symptom.find(params[:id])
   end

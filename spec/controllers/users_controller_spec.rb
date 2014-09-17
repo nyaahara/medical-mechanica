@@ -10,7 +10,7 @@ RSpec.describe UsersController, :type => :controller do
     context '自分自身がアクセスしたとき' do
       before do
         login(alice)
-        get :show, user_id:alice.id
+        get :show, id:alice.id
       end
 
       it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
@@ -32,7 +32,7 @@ RSpec.describe UsersController, :type => :controller do
     context '他のユーザがアクセスしたとき' do
       before do
         login(bob)
-        get :show, user_id:alice.id
+        get :show, id:alice.id
       end
 
       it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
@@ -50,7 +50,7 @@ RSpec.describe UsersController, :type => :controller do
 
     context 'guestがアクセスしたとき' do
       before do
-        get :index, user_id:alice.id
+        get :show, id:alice.id
       end
 
       it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do

@@ -2,10 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate, except: :show
   before_action :user_self?, except: :show
 
-
   def show
-    owner_id = params[:id]
-    @user = User.find(owner_id)
+    @owner = User.find(params[:id])
+    @symptoms = Symptom.where(:user_id => params[:id])
   end
 
   def edit
