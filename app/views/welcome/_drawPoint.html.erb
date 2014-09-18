@@ -1,7 +1,0 @@
-<%= nested_form_for([user,data]) do |form| %>
-  <%= form.fields_for :details do |f|%>
-    <%= f.hidden_field :front_or_back, :class => 'frontOrBack' %>
-    <%= f.hidden_field :x, :class => 'pointX' %>
-    <%= f.hidden_field :y, :class => 'pointY' %>
-  <% end %>
-<% end %>
