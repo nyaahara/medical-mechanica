@@ -4,7 +4,6 @@ RSpec.describe UsersController, :type => :controller do
 
   describe 'GET #show' do
     let!(:alice){ FactoryGirl.create :user }
-    let!(:bob){ FactoryGirl.create :user }
     let!(:symptom){ FactoryGirl.create :symptom, user: alice }
 
     context '自分自身がアクセスしたとき' do
@@ -13,11 +12,11 @@ RSpec.describe UsersController, :type => :controller do
         get :show, id:alice.id
       end
 
-      it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
-        expect(assigns(:owner)).to eq(alice)
+      it '@userに、リクエストしたUser オブジェクトが格納されていること' do
+        expect(assigns(:user)).to eq(alice)
       end
 
-      it '@symptoms に、ownerのsymptomが格納されていること' do
+      it '@symptoms に、userのsymptomが格納されていること' do
         expect(assigns(:symptoms)).to match_array([symptom])
       end
 
@@ -30,16 +29,17 @@ RSpec.describe UsersController, :type => :controller do
     end
 
     context '他のユーザがアクセスしたとき' do
+      let!(:bob){ FactoryGirl.create :user }
       before do
         login(bob)
         get :show, id:alice.id
       end
 
-      it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
-        expect(assigns(:owner)).to eq(alice)
+      it '@userに、リクエストしたUser オブジェクトが格納されていること' do
+        expect(assigns(:user)).to eq(alice)
       end
 
-      it '@symptoms に、ownerのsymptomが格納されていること' do
+      it '@symptoms に、userのsymptomが格納されていること' do
         expect(assigns(:symptoms)).to match_array([symptom])
       end
 
@@ -53,11 +53,11 @@ RSpec.describe UsersController, :type => :controller do
         get :show, id:alice.id
       end
 
-      it '@ownerに、リクエストしたUser オブジェクトが格納されていること' do
-        expect(assigns(:owner)).to eq(alice)
+      it '@userに、リクエストしたUser オブジェクトが格納されていること' do
+        expect(assigns(:user)).to eq(alice)
       end
 
-      it '@symptoms に、ownerのsymptomが格納されていること' do
+      it '@symptoms に、userのsymptomが格納されていること' do
         expect(assigns(:symptoms)).to match_array([symptom])
       end
 
@@ -69,6 +69,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe 'GET #edit' do
     let!(:alice){ FactoryGirl.create :user }
+    let!(:symptom){ FactoryGirl.create :symptom, user: alice }
 
     context '未ログインユーザがアクセスしたとき' do
       before { get :edit, id:alice.id }
@@ -82,8 +83,12 @@ RSpec.describe UsersController, :type => :controller do
         get :edit, id:alice.id
       end
 
-      it '@userに、リクエストしたUserオブジェクトが格納されていること' do
+      it '@userに、リクエストしたUser オブジェクトが格納されていること' do
         expect(assigns(:user)).to eq(alice)
+      end
+
+      it '@symptoms に、userのsymptomが格納されていること' do
+        expect(assigns(:symptoms)).to match_array([symptom])
       end
 
       it 'editテンプレートをrenderしていること' do
