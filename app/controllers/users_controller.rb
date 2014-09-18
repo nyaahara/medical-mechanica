@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @symptoms = Symptom.where(:user_id => params[:id])
   end
 
   def update
