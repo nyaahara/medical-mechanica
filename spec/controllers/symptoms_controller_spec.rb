@@ -144,8 +144,8 @@ RSpec.describe SymptomsController, :type => :controller do
         end
 
         it '@symptomのshowアクションにリダイレクトすること' do
-          expect(response).to redirect_to(:action => :index, :user_id => assigns(:symptom).id,
-                                          :notice => '更新しました')
+          ## noticeのテストはできないみたいなので、省いています。
+          expect(response).to redirect_to(alice)
         end
       end
 
