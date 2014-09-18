@@ -1,6 +1,4 @@
-<div class="">
-  <%=@user.nickname%>
-</div>
+<%= render partial: 'symptoms', locals: {user: @user, symptoms: @symptoms} %>
 
 <%= form_for(@user) do |f| %>
 
