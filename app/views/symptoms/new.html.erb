@@ -2,14 +2,14 @@
   今の症状を登録します
 </div>
 
-<%= render partial: "messages", locals: {err: @symptom.errors} %>
-<%= render partial: "modal" %>
+<%= render partial: 'common/messages', locals: {err: @symptom.errors} %>
+<%= render partial: 'common/modal' %>
 
-<%= render partial: "canvas" %>
+<%= render partial: 'common/canvas' %>
   
 <%= nested_form_for([current_user,@symptom]) do |f| %>
 
-  <%= render partial: "details", locals: {form: f} %>
+  <%= render partial: 'common/details', locals: {form: f} %>
 
   <div style="clear:both"></div>
   <%= f.submit '登録', id: 'register', class: 'btn btn-default', data: { disable_with: '作成中' } %>

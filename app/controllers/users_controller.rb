@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :user_self?, except: :show
 
   def show
-    @owner = User.find(params[:id])
+    @user = User.find(params[:id])
     @symptoms = Symptom.where(:user_id => params[:id])
   end
 
