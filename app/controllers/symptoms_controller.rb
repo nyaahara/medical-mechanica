@@ -34,7 +34,7 @@ class SymptomsController < ApplicationController
     end.length == 0
 
     if @symptom.update(param)
-      redirect_to action: 'index', notice: '更新しました'
+      redirect_to controller: 'users', action: 'edit', notice: '更新しました'
     else
       render :edit
     end
