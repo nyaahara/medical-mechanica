@@ -1,5 +1,1 @@
-<div class="">
-  <%=@user.nickname%>
-  <%= link_to '編集したい', edit_user_path(@user) %>
-</div>
-
+<%= render partial: 'symptoms', locals: {user: @user, symptoms: @symptoms} %>

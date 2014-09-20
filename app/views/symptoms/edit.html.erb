@@ -1,10 +1,10 @@
-<%= render partial: "messages", locals: {err: @symptom.errors} %>
-<%= render partial: "modal" %>
+<%= render partial: 'common/messages', locals: {err: @symptom.errors} %>
+<%= render partial: 'common/modal' %>
 
-<%= render partial: "canvas" %>
+<%= render partial: 'common/canvas' %>
   
 <%= nested_form_for([current_user,@symptom]) do |f| %>
-  <%= render partial: "details", locals: {form: f} %>
+  <%= render partial: 'common/details', locals: {form: f} %>
 
   <div style="clear:both"></div>
   <%= f.submit '更新', id: 'register', class: 'btn btn-primary', data: { disable_with: '更新中' } %>

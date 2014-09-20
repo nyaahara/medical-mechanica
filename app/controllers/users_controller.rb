@@ -2,22 +2,22 @@ class UsersController < ApplicationController
   before_action :authenticate, except: :show
   before_action :user_self?, except: :show
 
-
   def show
-    owner_id = params[:id]
-    @user = User.find(owner_id)
+    @user = User.find(params[:id])
+    @symptoms = Symptom.where(:user_id => params[:id])
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
+    @symptoms = Symptom.where(:user_id => params[:id])
   end
 
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to action: 'show', notice: '更新しました'
+      redirect_to action: 'edit', :notice => '更新しました'
     else
-      render :edit
+      render action: 'edit'
     end
   end
 

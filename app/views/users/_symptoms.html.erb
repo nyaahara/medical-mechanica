@@ -1,0 +1,29 @@
+<h3>
+    <!-- TODO I want Twitter's icon here -->
+    <%= @user.nickname %>さんの症状
+    <!-- TODO I want birthday and sex here -->
+    <!-- TODO I want social link to twitter, facebook, mixi .... here -->
+</h3>
+
+<% @symptoms.each do |symptom| %>
+    <div style="display:none;" class="">
+        <%= render partial: 'common/canvas' %>
+        <%= render partial: 'common/drawPoint', locals: {user: @user, data: symptom} %>
+    </div>
+
+    <div style="clear:both">
+        <%= symptom.created_at.strftime('%Y/%m/%d %H:%M') %>
+        <% if symptom.created_by?(current_user) %>
+            <%= link_to edit_user_symptom_path(current_user,symptom) do %>
+                編集
+            <% end %>
+            <%= link_to user_symptom_path(current_user,symptom), method: :delete, data: {confirm: '本当に削除しますか？'} do %>
+                削除
+            <% end %>
+        <% end %>
+    </div>
+    <%= render partial: 'common/showDetails', locals: {data: symptom} %>
+
+    <div style="clear:both"></div>
+<% end %>
+

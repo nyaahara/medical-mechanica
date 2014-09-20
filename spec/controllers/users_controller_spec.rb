@@ -4,9 +4,9 @@ RSpec.describe UsersController, :type => :controller do
 
   describe 'GET #show' do
     let!(:alice){ FactoryGirl.create :user }
-    let!(:bob){ FactoryGirl.create :user }
+    let!(:symptom){ FactoryGirl.create :symptom, user: alice }
 
-    context 'userのownerがアクセスしたとき' do
+    context '自分自身がアクセスしたとき' do
       before do
         login(alice)
         get :show, id:alice.id
@@ -16,12 +16,20 @@ RSpec.describe UsersController, :type => :controller do
         expect(assigns(:user)).to eq(alice)
       end
 
+      it '@symptoms に、userのsymptomが格納されていること' do
+        expect(assigns(:symptoms)).to match_array([symptom])
+      end
+
+      # showをrenderしたらだめだね。editをrenderにするか、404をrenderにするか決めないと。
+      # showをリクエストしてeditを返すのはRESTの設計的にどうなんだろうか？
+      # showはshowでいいんじゃないかな・・・将来的に「他のユーザにはこんな感じで見えてます」的なページで使うかも。
       it 'showテンプレートをrenderしていること' do
         expect(response).to render_template :show
       end
     end
 
-    context 'userのowner以外がアクセスしたとき' do
+    context '他のユーザがアクセスしたとき' do
+      let!(:bob){ FactoryGirl.create :user }
       before do
         login(bob)
         get :show, id:alice.id
@@ -29,6 +37,10 @@ RSpec.describe UsersController, :type => :controller do
 
       it '@userに、リクエストしたUser オブジェクトが格納されていること' do
         expect(assigns(:user)).to eq(alice)
+      end
+
+      it '@symptoms に、userのsymptomが格納されていること' do
+        expect(assigns(:symptoms)).to match_array([symptom])
       end
 
       it 'showテンプレートをrenderしていること' do
@@ -45,6 +57,10 @@ RSpec.describe UsersController, :type => :controller do
         expect(assigns(:user)).to eq(alice)
       end
 
+      it '@symptoms に、userのsymptomが格納されていること' do
+        expect(assigns(:symptoms)).to match_array([symptom])
+      end
+
       it 'showテンプレートをrenderしていること' do
         expect(response).to render_template :show
       end
@@ -53,6 +69,7 @@ RSpec.describe UsersController, :type => :controller do
 
   describe 'GET #edit' do
     let!(:alice){ FactoryGirl.create :user }
+    let!(:symptom){ FactoryGirl.create :symptom, user: alice }
 
     context '未ログインユーザがアクセスしたとき' do
       before { get :edit, id:alice.id }
@@ -66,8 +83,12 @@ RSpec.describe UsersController, :type => :controller do
         get :edit, id:alice.id
       end
 
-      it '@userに、リクエストしたUserオブジェクトが格納されていること' do
+      it '@userに、リクエストしたUser オブジェクトが格納されていること' do
         expect(assigns(:user)).to eq(alice)
+      end
+
+      it '@symptoms に、userのsymptomが格納されていること' do
+        expect(assigns(:symptoms)).to match_array([symptom])
       end
 
       it 'editテンプレートをrenderしていること' do
@@ -112,10 +133,12 @@ RSpec.describe UsersController, :type => :controller do
           expect(alice.sex).not_to eq (alice.reload.sex)
         end
 
-        it '@userのshowアクションにリダイレクトすること' do
-          expect(response).to redirect_to(:action => :show, :id => assigns(:user).id,
-                                          :notice => '更新しました')
-        end
+        # it '@userのeditアクションにリダイレクトすること' do
+          # renderだとredirect_toでテストできない。
+          # rspecではなくて、Request specを使わないとテストできないみたいです。
+          # expect(response).to redirect_to(:action => :edit, :id => assigns(:user).id,
+          #                                :notice => '更新しました')
+        # end
       end
     end
 
