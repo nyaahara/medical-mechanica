@@ -6,19 +6,13 @@
   </div>
 
   <div class="pull-left">
-    <%= image_tag symptom.user.image_url %>
+    <%= image_tag symptom.user.image_url, :class => 'original-icon' %>
   </div>
   <div class="">
-      <% if symptom.created_by?(current_user) %>
-        <%= link_to edit_user_path(symptom.user) do %>
-              <%= symptom.user.nickname %>
-        <% end %>
-      <% else %>
-          <%= link_to user_path(symptom.user) do %>
-              <%= symptom.user.nickname %>
-          <% end %>
+      <%= link_to user_path(symptom.user) do %>
+          <%= symptom.user.nickname %>
       <% end %>
-    さんが新しい症状を登録しました。
+      さんが新しい症状を登録しました。
   </div>
   <%= symptom.created_at.strftime('%Y/%m/%d %H:%M') %>
   <div style="clear:both"></div>
