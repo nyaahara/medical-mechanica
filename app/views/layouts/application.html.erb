@@ -35,8 +35,8 @@
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
           <li><%= link_to '症状を登録する', new_user_symptom_path(current_user) %></li>
-            <li><%= link_to  edit_user_path(current_user) do %>
-                <%= image_tag current_user.image_url %>
+            <li><%= link_to  user_path(current_user) do %>
+                <%= image_tag current_user.image_url, :class => 'small-icon' %>
               <% end %>
             </li>
             <li><%= link_to 'ログアウト', logout_path %></li>
