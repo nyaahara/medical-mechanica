@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @symptoms = Symptom.where(:user_id => params[:id])
+    @symptoms = Symptom.where(:user_id => params[:id]).reverse_order
   end
 
   def destroy
