@@ -54,9 +54,8 @@ RSpec.describe SymptomsController, :type => :controller do
           expect{subject}.to change { Symptom.count }.by(1)
         end
           
-        it '@symptomのindexアクションにリダイレクトすること' do
-          expect(subject).to redirect_to :action => :index, :user_id => assigns(:symptom).id,
-            :notice => '登録しました'
+        it 'users#showにredirectすること' do
+          expect(subject).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '登録しました' )
         end
       end
 
@@ -145,7 +144,7 @@ RSpec.describe SymptomsController, :type => :controller do
 
         it '@symptomのshowアクションにリダイレクトすること' do
           ## noticeのテストはできないみたいなので、省いています。
-          expect(response).to redirect_to(:controller => 'users', :action => 'edit', :id => alice.id, :notice => '更新しました' )
+          expect(response).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '更新しました' )
         end
       end
 
@@ -157,9 +156,8 @@ RSpec.describe SymptomsController, :type => :controller do
           expect {subject}.to change { Symptom.count }
         end
 
-        it 'indexテンプレートをrenderしていること' do
-          expect(subject).to redirect_to(:action => :index, :user_id => assigns(:symptom).id,
-                                          :notice => '削除しました')
+        it 'users#showにredirectすること' do
+          expect(subject).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '削除しました' )
         end
       end
     end
@@ -197,10 +195,9 @@ RSpec.describe SymptomsController, :type => :controller do
             to change { Symptom.count }.by(-1)
       end
 
-      it 'indexテンプレートをrenderしていること' do
+      it 'users#showにredirectすること' do
         delete :destroy, user_id: alice.id, id: symptom.id
-        expect(response).to redirect_to(:action => :index, :user_id => assigns(:symptom).id,
-                                       :notice => '削除しました')
+        expect(response).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '削除しました' )
       end
     end
 

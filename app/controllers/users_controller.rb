@@ -7,20 +7,6 @@ class UsersController < ApplicationController
     @symptoms = Symptom.where(:user_id => params[:id])
   end
 
-  def edit
-    @user = User.find(params[:id])
-    @symptoms = Symptom.where(:user_id => params[:id])
-  end
-
-  def update
-    @user = current_user
-    if @user.update(user_params)
-      redirect_to action: 'edit', :notice => '更新しました'
-    else
-      render action: 'edit'
-    end
-  end
-
   def destroy
     @user = current_user
     @user.destroy!

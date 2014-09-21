@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :users do
-    resources :symptoms
+  resources :users, only:[:show, :destroy] do
+    resources :symptoms, only:[:create, :show, :new, :edit, :update, :destroy]
   end
 
   root to: 'welcome#index'

@@ -20,9 +20,6 @@ RSpec.describe UsersController, :type => :controller do
         expect(assigns(:symptoms)).to match_array([symptom])
       end
 
-      # showをrenderしたらだめだね。editをrenderにするか、404をrenderにするか決めないと。
-      # showをリクエストしてeditを返すのはRESTの設計的にどうなんだろうか？
-      # showはshowでいいんじゃないかな・・・将来的に「他のユーザにはこんな感じで見えてます」的なページで使うかも。
       it 'showテンプレートをrenderしていること' do
         expect(response).to render_template :show
       end
@@ -63,95 +60,6 @@ RSpec.describe UsersController, :type => :controller do
 
       it 'showテンプレートをrenderしていること' do
         expect(response).to render_template :show
-      end
-    end
-  end
-
-  describe 'GET #edit' do
-    let!(:alice){ FactoryGirl.create :user }
-    let!(:symptom){ FactoryGirl.create :symptom, user: alice }
-
-    context '未ログインユーザがアクセスしたとき' do
-      before { get :edit, id:alice.id }
-      it_should_behave_like '認証が必要なページ'
-    end
-
-
-    context 'ログインユーザかつイベントを作成したユーザがアクセスしたとき' do
-      before do
-        login(alice)
-        get :edit, id:alice.id
-      end
-
-      it '@userに、リクエストしたUser オブジェクトが格納されていること' do
-        expect(assigns(:user)).to eq(alice)
-      end
-
-      it '@symptoms に、userのsymptomが格納されていること' do
-        expect(assigns(:symptoms)).to match_array([symptom])
-      end
-
-      it 'editテンプレートをrenderしていること' do
-        expect(response).to render_template :edit
-      end
-    end
-
-    context 'ログインユーザかつイベントを作成していないユーザがアクセスしたとき' do
-      let!(:bob){ FactoryGirl.create :user }
-      before do
-        login(bob)
-        get :edit, id:alice.id
-      end
-
-      it 'error404テンプレートをrenderしていること' do
-        expect(response).to render_template :error404
-      end
-    end
-  end
-
-
-  describe 'PATCH #update' do
-    let!(:alice){ FactoryGirl.create :user }
-
-    context '未ログインユーザがアクセスしたとき' do
-      before {
-        patch :update, id:alice.id, user: FactoryGirl.attributes_for(:user)
-      }
-      it_should_behave_like '認証が必要なページ'
-    end
-
-    context 'ログインユーザかつイベントを作成したユーザがアクセスしたとき' do
-      before { login(alice) }
-
-      context 'かつパラメータが正しいとき' do
-        before do
-          patch :update, id:alice.id, user: {'birth' => '1986-03-22', 'sex' =>1}
-        end
-
-        it 'Userレコードが正しく変更されていること' do
-          # うまくtestできないので、sexが変わっていることでOKとしています。
-          expect(alice.sex).not_to eq (alice.reload.sex)
-        end
-
-        # it '@userのeditアクションにリダイレクトすること' do
-          # renderだとredirect_toでテストできない。
-          # rspecではなくて、Request specを使わないとテストできないみたいです。
-          # expect(response).to redirect_to(:action => :edit, :id => assigns(:user).id,
-          #                                :notice => '更新しました')
-        # end
-      end
-    end
-
-    context 'ログインユーザかつイベントを作成していないユーザがアクセスしたとき' do
-      let!(:not_owner) { FactoryGirl.create :user }
-
-      before do
-        login(not_owner)
-        patch :update, id:alice.id, user: FactoryGirl.attributes_for(:user)
-      end
-
-      it 'error404テンプレートをrenderしていること' do
-        expect(response).to render_template :error404
       end
     end
   end
