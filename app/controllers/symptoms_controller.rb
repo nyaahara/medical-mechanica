@@ -1,6 +1,6 @@
 class SymptomsController < ApplicationController
 
-  before_action :authenticate, except: :index
+  before_action :authenticate
 
   def new 
     @symptom = current_user.symptom.build
@@ -9,7 +9,7 @@ class SymptomsController < ApplicationController
   def create
     @symptom = current_user.symptom.build(strong_params)
     if @symptom.save
-      redirect_to action: 'index', notice: '登録しました'
+      redirect_to controller: 'users', action: 'show', id: current_user.id, notice: '登録しました'
     else
       render :new
     end
@@ -34,7 +34,7 @@ class SymptomsController < ApplicationController
     end.length == 0
 
     if @symptom.update(param)
-      redirect_to controller: 'users', action: 'edit', notice: '更新しました'
+      redirect_to controller: 'users', action: 'show', id: current_user.id, notice: '更新しました'
     else
       render :edit
     end
@@ -43,7 +43,7 @@ class SymptomsController < ApplicationController
   def destroy
     @symptom = current_user.symptom.find(params[:id])
     if @symptom.destroy!
-      redirect_to action: 'index', notice: '削除しました'
+      redirect_to controller: 'users', action: 'show', id: current_user.id, notice: '削除しました'
     end
   end
 
