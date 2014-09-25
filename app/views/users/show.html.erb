@@ -1,1 +1,10 @@
+<h3>
+    <div class="pull-left">
+        <%= image_tag @user.image_url, :class => 'original-icon' %>
+    </div>
+    <div class="">
+        <%= @user.nickname %>さんの記録
+    </div>
+</h3>
+
 <%= render partial: 'symptoms', locals: {user: @user, symptoms: @symptoms} %>

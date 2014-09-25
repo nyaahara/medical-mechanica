@@ -1,4 +1,14 @@
 
+<div class="description">
+    あなたの体調不良を記録するサイトです。<BR>
+    記録を見ながら病院で症状の説明に役立てたり、<BR>
+    記録を見た他のユーザーから、治療のアドバイスを貰えるかもしれません。<BR>
+    <BR>
+    記録した症状は全て公開されます。<BR>
+    ご理解の上、ご利用ください。<BR>
+</div>
+
+
 <% @symptoms.each do |symptom| %>
   <div style="display:none;" class="">
     <%= render partial: 'common/canvas' %>
@@ -6,18 +16,18 @@
   </div>
 
   <div class="pull-left">
-    <%= image_tag symptom.user.image_url %>
+    <%= image_tag symptom.user.image_url, :class => 'original-icon' %>
   </div>
   <div class="">
       <%= link_to user_path(symptom.user) do %>
           <%= symptom.user.nickname %>
       <% end %>
-      さんが新しい症状を登録しました。
+      さんが新しく記録しました。
   </div>
   <%= symptom.created_at.strftime('%Y/%m/%d %H:%M') %>
   <div style="clear:both"></div>
   <%= render partial: 'common/showDetails', locals: {data: symptom} %>
 
-  <div style="clear:both"></div>
+  <div style="clear:both; height:20px;"></div>
   
 <% end %>

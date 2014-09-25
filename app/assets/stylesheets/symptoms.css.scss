@@ -20,8 +20,9 @@ canvas#back{
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
   border-radius: 15px;
+  padding-right:15px;
 }
 
-input, select, option, textarea {
-  font-size: 16px !important;
+.entry-part{
+  margin-bottom:0px !important;
 }

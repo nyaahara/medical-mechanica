@@ -1,10 +1,3 @@
-<h3>
-    <!-- TODO I want Twitter's icon here -->
-    <%= @user.nickname %>さんの症状
-    <!-- TODO I want birthday and sex here -->
-    <!-- TODO I want social link to twitter, facebook, mixi .... here -->
-</h3>
-
 <% @symptoms.each do |symptom| %>
     <div style="display:none;" class="">
         <%= render partial: 'common/canvas' %>
@@ -13,6 +6,17 @@
 
     <div style="clear:both">
         <%= symptom.created_at.strftime('%Y/%m/%d %H:%M') %>
+        <% unless symptom.created_by?(current_user) %>
+            <a href="https://twitter.com/intent/tweet?screen_name=<%= @user.nickname %>&text=%20%23U6 <%=url_for_symptom(symptom)%>"
+               class="twitter-mention-button"
+               data-lang="ja"
+               data-size="small"
+               data-related="<%= @user.nickname %>"
+               data-dnt="false">
+                @<%= @user.nickname %>さんへツイートする
+            </a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <% end %>
         <% if symptom.created_by?(current_user) %>
             <%= link_to edit_user_symptom_path(current_user,symptom) do %>
                 編集
@@ -23,7 +27,8 @@
         <% end %>
     </div>
     <%= render partial: 'common/showDetails', locals: {data: symptom} %>
-
     <div style="clear:both"></div>
+    <div style="height:30px;"></div>
+
 <% end %>
 
