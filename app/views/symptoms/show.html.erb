@@ -1,0 +1,24 @@
+<h3>
+    <!-- TODO I want Twitter's icon here -->
+    <%= @user.nickname %>さんの記録
+
+</h3>
+
+<div style="display:none;" class="">
+    <%= render partial: 'common/canvas' %>
+    <%= render partial: 'common/drawPoint', locals: {user: @user, data: @symptom} %>
+</div>
+<% unless @symptom.created_by?(current_user) %>
+    <a href="https://twitter.com/intent/tweet?screen_name=<%= @user.nickname %>&text=%20%23U6 <%=url_for_symptom(@symptom)%>"
+       class="twitter-mention-button"
+       data-lang="ja"
+       data-size="small"
+       data-related="<%= @user.nickname %>"
+       data-dnt="false">
+        @<%= @user.nickname %>さんへツイートする
+    </a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+<% end %>
+<%= render partial: 'common/showDetails', locals: {data: @symptom} %>
+
+<!-- TODO I want Twitter's comment here -->

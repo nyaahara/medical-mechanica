@@ -40,6 +40,11 @@ class SymptomsController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find(params[:user_id])
+    @symptom = Symptom.find(params[:id])
+  end
+
   def destroy
     @symptom = current_user.symptom.find(params[:id])
     if @symptom.destroy!
