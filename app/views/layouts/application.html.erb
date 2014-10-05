@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>U6</title>
+  <title>kiroku</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -27,16 +27,16 @@
           <span class="icon-bar"></span>
         </button>
         <%= link_to root_path, class: 'navbar-brand' do %>
-          U6
+          Kiroku
         <% end %>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
-          <li><%= link_to '症状を登録する', new_user_symptom_path(current_user) %></li>
+          <li><%= link_to '記録する', new_user_symptom_path(current_user) %></li>
             <li><%= link_to  user_path(current_user) do %>
-                <%= image_tag current_user.image_url, :class => 'small-icon' %>
+                <%= image_tag current_user.image_url, :class => 'small-icon' %> 記録を見る
               <% end %>
             </li>
             <li><%= link_to 'ログアウト', logout_path %></li>
@@ -49,23 +49,39 @@
   </header>
   <div class="container">
     <% if flash[:notice] %>
+      <div style="height:25px;"></div>
       <div class="alert alert-success">
         <%= flash[:notice] %>
       </div>
     <% end %>
     <% if flash[:alert] %>
+      <div style="height:25px;"></div>
       <div class="alert alert-danger">
         <%= flash[:alert] %>
       </div>
     <% end %>
-    <%= yield %>
   </div>
+    <%= yield %>
 <style>
 .footer {
   margin: 20px 0px 0px 0px;
 }
 </style>
-  <footer class="footer navbar navbar-default" role="navigation">
+  <footer class="footer navbar navbar-default text-center" role="navigation">
+      <div class="howto">
+          <%= link_to 'Kirokuとは', 'info' %>
+      </div>
+
+      <div class="contact">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://test" data-text="体調不良を記録するWebサービスKiroku" data-via="nyaahara" data-lang="ja" data-size="large" data-hashtags="kiroku">ツイート</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          <a href="https://twitter.com/nyaahara" class="twitter-follow-button" data-show-count="false" data-lang="ja" data-size="large">@nyaaharaさんをフォロー</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      </div>
+
+      <div class="copyright">
+          &copy; 2014 NIIHARA Daisuke.
+      </div>
   </footer>
   
 </body>

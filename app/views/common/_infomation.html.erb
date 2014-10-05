@@ -1,0 +1,57 @@
+<div class="description">
+    <div class="col-xs-12 col-md-4 text-center step">
+        <div class="description-image site-image center-block"></div>
+        <div class="description-text">
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-8 step">
+        <div class="description-text">
+            Kirokuは、体調不良を記録できるWebサービスです。<BR>
+            診察の時にKirokuを見ながら説明したり、<BR>
+            Kirokuの他のユーザーから治療のアドバイスが貰えるかもしれません。<BR>
+            <BR>
+            記録した症状は全てのユーザーに公開されます。<BR>
+            ご理解の上、ご利用ください。<BR>
+            また、Kirokuを利用するためにはTwitterのアカウントが必要です。<BR>
+        </div>
+    </div>
+</div>
+<div class="description ex1">
+    <div class="col-xs-12 col-md-4 text-center step">
+        <div class="description-image first center-block"></div>
+        <div class="description-text">
+            まずはKirokuに体調を記録しましょう。
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-4 text-center step">
+        <div class="description-image second center-block"></div>
+        １時間おき、１日おき、気が付いた時、定期的に記録をためて...
+    </div>
+    <div class="col-xs-12 col-md-4 text-center step">
+        <div class="description-image third center-block"></div>
+        お医者さんに相談するときに活用しましょう！
+        Kirokuを見ながら話せば、症状を正確に伝えられます♪
+    </div>
+</div>
+
+<div class="description ex2">
+    <div class="col-xs-12 col-md-4 text-center step">
+        <div class="description-image four center-block"></div>
+        溜まった記録を見た他のユーザから...
+    </div>
+    <div class="col-xs-12 col-md-4 text-center step">
+        <div class="description-image last center-block"></div>
+        Twitter経由でアドバイスが貰えるかもしれません！
+    </div>
+    <div class="col-xs-12 col-md-4 text-center step">
+    </div>
+</div>
+
+<div class="start-kiroku text-center">
+    <% unless logged_in? %>
+        <%= link_to 'Kirokuをはじめる', '/auth/twitter', class:'btn btn-default btn-block' %>
+    <% else %>
+        <%= link_to '記録する', new_user_symptom_path(current_user), class:'btn btn-default' %>
+        <%= link_to '記録を見る', user_path(current_user) , class:'btn btn-default' %>
+    <% end %>
+</div>

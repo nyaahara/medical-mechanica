@@ -3,6 +3,8 @@ Rails.application.routes.draw do
     resources :symptoms, only:[:create, :show, :new, :edit, :update, :destroy]
   end
 
+  get 'info' => 'info#show'
+
   root to: 'welcome#index'
   get 'auth/:provider/callback' => 'sessions#create'
 
