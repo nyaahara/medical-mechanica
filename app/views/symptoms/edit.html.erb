@@ -1,3 +1,4 @@
+<div class="container">
 <%= render partial: 'common/messages', locals: {err: @symptom.errors} %>
 <%= render partial: 'common/modal' %>
 
@@ -9,4 +10,4 @@
   <div style="clear:both"></div>
   <%= f.submit '更新', id: 'register', class: 'btn btn-primary', data: { disable_with: '更新中' } %>
 <% end %>
-
+</div>

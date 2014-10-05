@@ -1,0 +1,42 @@
+// Place all the styles related to the symptoms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.description-image{
+  height:256px;
+  width:256px;
+  margin-bottom:20px;
+}
+.description{
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top:25px;
+}
+.description:after{
+  content:"";
+  display:block;
+  clear:both;
+}
+.description .step{
+  margin-bottom:25px;
+}
+.ex1{
+  background-color:darkseagreen;
+}
+.ex2{
+  background-color: darkkhaki;
+}
+.ex1 .description-image, .ex1 .description-text{
+  background-color:darkseagreen;
+}
+
+.site-image{background-image:url(image-path('smartphone.png'));}
+.first{background-image:url(image-path('edit10.png'));}
+.second{background-image:url(image-path('paper64.png'));}
+.third{background-image:url(image-path('hospital11.png'));}
+.four{background-image:url(image-path('paper64.png'));}
+.last{background-image:url(image-path('social19.png'));}
+
+.start-kiroku{
+  margin-top: 25px;
+}
