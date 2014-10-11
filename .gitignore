@@ -21,7 +21,6 @@ medical-mechanica.iml
 /log/*.log
 /tmp
 
-secrets.yml
 *.swp
 
 public/uploads
