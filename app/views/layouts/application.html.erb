@@ -47,6 +47,8 @@
       </div>
     </div>
   </header>
+  <div class="main-content">
+
   <div class="container">
     <% if flash[:notice] %>
       <div style="height:25px;"></div>
@@ -62,6 +64,7 @@
     <% end %>
   </div>
     <%= yield %>
+  </div>
 <style>
 .footer {
   margin: 20px 0px 0px 0px;
