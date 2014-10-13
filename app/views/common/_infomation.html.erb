@@ -7,7 +7,7 @@
     <div class="col-xs-12 col-md-8 step">
         <div class="description-text">
             Kirokuは、体調不良を記録できるWebサービスです。<BR>
-            診察の時にKirokuを見ながら説明したり、<BR>
+            病院での問診の時にKirokuを見ながら説明したり、<BR>
             Kirokuの他のユーザーから治療のアドバイスが貰えるかもしれません。<BR>
             <BR>
             記録した症状は全てのユーザーに公開されます。<BR>
@@ -29,8 +29,8 @@
     </div>
     <div class="col-xs-12 col-md-4 text-center step">
         <div class="description-image third center-block"></div>
-        お医者さんに相談するときに活用しましょう！
-        Kirokuを見ながら話せば、症状を正確に伝えられます♪
+        病院での問診にて活用しましょう！<br>
+        Kirokuを見ながら話せば、症状を正確に伝えられます。
     </div>
 </div>
 
@@ -47,11 +47,23 @@
     </div>
 </div>
 
-<div class="start-kiroku text-center">
-    <% unless logged_in? %>
-        <%= link_to 'Kirokuをはじめる', '/auth/twitter', class:'btn btn-default btn-block' %>
-    <% else %>
-        <%= link_to '記録する', new_user_symptom_path(current_user), class:'btn btn-default' %>
-        <%= link_to '記録を見る', user_path(current_user) , class:'btn btn-default' %>
-    <% end %>
+<div class="start-kiroku">
+    <div class="col-xs-12 col-md-4">
+        <% unless logged_in? %>
+            <%= link_to 'Kirokuをはじめる', '/auth/twitter', class:'btn btn-danger btn-lg btn-block' %>
+        <% else %>
+            <%= link_to '記録する', new_user_symptom_path(current_user), class:'btn btn-default' %>
+            <%= link_to '記録を見る', user_path(current_user) , class:'btn btn-default' %>
+        <% end %>
+    </div>
+    <div class="col-xs-12 col-md-8 step">
+        医療現場を患者側から効率化したくてKirokuを作りました。<br>
+        日本における医療リソース不足問題は、日々深刻化しています。<br>
+        医療リソースを有効に活用するためには、病院の努力だけではなく<br>
+        我々、患者も努力しないといけないという想いでサービスを運営いたします。<br>
+        問診にかかる時間を一人あたり一分、一秒でも減らすことができれば<br>
+        より多くの患者さんが医療を受けられるのではないかと思っています。<br>
+        <br>
+        Kirokuを活用して、ご自身の問診を効率よく進めることで、日本が抱える問題に貢献されることを願っています。<br>
+    </div>
 </div>
