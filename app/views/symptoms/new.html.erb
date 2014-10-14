@@ -1,10 +1,7 @@
 <div class="container">
 
 <div class="description">
-    下記の人体図をクリックして症状を記録して下さい。<BR>
-    <BR>
-    記録した症状は全て公開されます。<BR>
-    ご理解の上、ご利用ください。<BR>
+    下記の人体図をクリックして症状を入力、記録して下さい。<BR>
 </div>
 
 <%= render partial: 'common/messages', locals: {err: @symptom.errors} %>
@@ -17,7 +14,7 @@
   <%= render partial: 'common/details', locals: {form: f} %>
 
   <div style="clear:both"></div>
-  <%= f.submit '登録', id: 'register', class: 'btn btn-default', data: { disable_with: '作成中' } %>
+  <%= f.submit '記録', id: 'register', class: 'btn btn-primary btn-lg btn-block', data: { disable_with: '作成中' } %>
 <% end %>
 
 </div>
