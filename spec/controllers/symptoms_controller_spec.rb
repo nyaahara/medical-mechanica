@@ -8,14 +8,14 @@ RSpec.describe SymptomsController, :type => :controller do
     let!(:alice){ FactoryGirl.create :user }
 
     context '未ログインユーザがアクセスしたとき' do
-      before { get :new, user_id:alice.id }
+      before { get :new, user_id:alice.id_alias }
       it_should_behave_like '認証が必要なページ'
     end
 
     context 'ログインユーザがアクセスしたとき' do
       before do
         login(alice)
-        get :new, user_id:alice.id
+        get :new, user_id:alice.id_alias
       end
 
       it 'ステータスコードとして200が返ること' do
@@ -37,7 +37,7 @@ RSpec.describe SymptomsController, :type => :controller do
 
     context '未ログインユーザがアクセスしたとき' do
       before { post :create,
-        user_id:alice.id,
+        user_id:alice.id_alias,
         symptom: FactoryGirl.attributes_for(:symptom) }
       it_should_behave_like '認証が必要なページ'
     end
@@ -48,21 +48,21 @@ RSpec.describe SymptomsController, :type => :controller do
       context 'パラメータが正しいとき' do
 
         part_params = { parts_attributes: {'1407946283982' => FactoryGirl.attributes_for(:part)} }
-        subject { post :create, user_id: alice.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
+        subject { post :create, user_id: alice.id_alias, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
 
         it 'Symptomレコードが1件増えること' do
           expect{subject}.to change { Symptom.count }.by(1)
         end
           
         it 'users#showにredirectすること' do
-          expect(subject).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '登録しました' )
+          expect(subject).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id_alias, :notice => '登録しました' )
         end
       end
 
       context 'パラメータが不正なとき' do
 
         part_params = { parts_attributes: {'1407946283982' => nil} }
-        subject { post :create, user_id: alice.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
+        subject { post :create, user_id: alice.id_alias, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
 
         it 'Symptomレコードの件数に変化がないこと' do
           expect{ subject }.
@@ -81,7 +81,7 @@ RSpec.describe SymptomsController, :type => :controller do
     let!(:symptom) { FactoryGirl.create :symptom, user: alice }
 
     context '未ログインユーザがアクセスしたとき' do
-      before { get :edit, user_id:alice.id, id: symptom.id }
+      before { get :edit, user_id:alice.id_alias, id: symptom.id }
       it_should_behave_like '認証が必要なページ'
     end
 
@@ -89,7 +89,7 @@ RSpec.describe SymptomsController, :type => :controller do
     context 'ログインユーザかつイベントを作成したユーザがアクセスしたとき' do
       before do
         login(alice)
-        get :edit, user_id:alice.id, id: symptom.id
+        get :edit, user_id:alice.id_alias, id: symptom.id
       end
 
       it '@symptomに、リクエストしたSymptomオブジェクトが格納されていること' do
@@ -105,7 +105,7 @@ RSpec.describe SymptomsController, :type => :controller do
       let!(:bob){ FactoryGirl.create :user }
       before do
         login(bob)
-        get :edit, user_id:alice.id, id: symptom.id
+        get :edit, user_id:alice.id_alias, id: symptom.id
       end
 
       it 'error404テンプレートをrenderしていること' do
@@ -121,7 +121,7 @@ RSpec.describe SymptomsController, :type => :controller do
 
     context '未ログインユーザがアクセスしたとき' do
       before {
-        patch :update, user_id:alice.id, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom)
+        patch :update, user_id:alice.id_alias, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom)
       }
       it_should_behave_like '認証が必要なページ'
     end
@@ -134,7 +134,7 @@ RSpec.describe SymptomsController, :type => :controller do
           part = FactoryGirl.attributes_for(:part)
           part.store('_destroy', 'false')
           part_params = { parts_attributes: {'1407946283982' => part} }
-          patch :update, user_id:alice.id, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params)
+          patch :update, user_id:alice.id_alias, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params)
         end
 
         it 'Symptomレコードが正しく変更されていること' do
@@ -144,20 +144,20 @@ RSpec.describe SymptomsController, :type => :controller do
 
         it '@symptomのshowアクションにリダイレクトすること' do
           ## noticeのテストはできないみたいなので、省いています。
-          expect(response).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '更新しました' )
+          expect(response).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id_alias, :notice => '更新しました' )
         end
       end
 
       context 'partの入力が空のとき' do
         part_params = { parts_attributes: {'1407946283982' => nil} }
-        subject { patch :update, user_id: alice.id, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
+        subject { patch :update, user_id: alice.id_alias, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom).merge(part_params) }
         it 'Symptomレコードが削除されていること' do
 
           expect {subject}.to change { Symptom.count }
         end
 
         it 'users#showにredirectすること' do
-          expect(subject).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '削除しました' )
+          expect(subject).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id_alias, :notice => '削除しました' )
         end
       end
     end
@@ -167,7 +167,7 @@ RSpec.describe SymptomsController, :type => :controller do
 
       before do
         login(not_owner)
-        patch :update, user_id:alice.id, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom)
+        patch :update, user_id:alice.id_alias, id: symptom.id, symptom: FactoryGirl.attributes_for(:symptom)
       end
 
       it 'error404テンプレートをrenderしていること' do
@@ -182,7 +182,7 @@ RSpec.describe SymptomsController, :type => :controller do
 
     context '未ログインユーザがアクセスしたとき' do
       before {
-        delete :destroy, user_id:alice.id, id: symptom.id
+        delete :destroy, user_id:alice.id_alias, id: symptom.id
       }
       it_should_behave_like '認証が必要なページ'
     end
@@ -191,13 +191,13 @@ RSpec.describe SymptomsController, :type => :controller do
       before { login(alice) }
 
       it 'Symptomレコードが1件減っていること' do
-        expect{ delete :destroy, user_id: alice.id, id: symptom.id }.
+        expect{ delete :destroy, user_id: alice.id_alias, id: symptom.id }.
             to change { Symptom.count }.by(-1)
       end
 
       it 'users#showにredirectすること' do
-        delete :destroy, user_id: alice.id, id: symptom.id
-        expect(response).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id, :notice => '削除しました' )
+        delete :destroy, user_id: alice.id_alias, id: symptom.id
+        expect(response).to redirect_to(:controller => 'users', :action => 'show', :id => alice.id_alias, :notice => '削除しました' )
       end
     end
 
@@ -206,12 +206,12 @@ RSpec.describe SymptomsController, :type => :controller do
       before { login(not_owner) }
 
       it 'Symptomレコードが減っていないこと' do
-        expect{ delete :destroy, user_id: alice.id, id: symptom.id }.
+        expect{ delete :destroy, user_id: alice.id_alias, id: symptom.id }.
             not_to change { Symptom.count }
       end
 
       it 'error404テンプレートをrenderしていること' do
-        delete :destroy, user_id: alice.id, id: symptom.id
+        delete :destroy, user_id: alice.id_alias, id: symptom.id
         expect(response).to render_template :error404
       end
     end

@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_action :user_self?, except: :show
 
   def show
-    @user = User.find(params[:id])
-    @symptoms = Symptom.where(:user_id => params[:id]).reverse_order
+    @user = User.where(id_alias: params[:id]).limit(1)[0]
+    @symptoms = Symptom.where(:user_id => @user.id).reverse_order
   end
 
   def destroy
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def user_self?
-    not_found unless current_user.id.to_s == params[:id]
+    not_found unless current_user.id_alias.to_s == params[:id]
   end
 
 end

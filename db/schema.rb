@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140812155847) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "parts", force: true do |t|
     t.integer  "symptom_id",    null: false
     t.string   "memo"
@@ -38,8 +41,6 @@ ActiveRecord::Schema.define(version: 20140812155847) do
     t.string   "uid",        null: false
     t.string   "nickname",   null: false
     t.string   "image_url",  null: false
-    t.string   "sex"
-    t.datetime "birth"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

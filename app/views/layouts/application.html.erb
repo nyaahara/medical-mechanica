@@ -34,8 +34,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
-          <li><%= link_to '記録する', new_user_symptom_path(current_user) %></li>
-            <li><%= link_to  user_path(current_user) do %>
+          <li><%= link_to '記録する', new_user_symptom_path(current_user.id_alias) %></li>
+            <li><%= link_to  user_path(current_user.id_alias) do %>
                 <%= image_tag current_user.image_url, :class => 'small-icon' %> 記録を見る
               <% end %>
             </li>

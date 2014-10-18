@@ -9,7 +9,7 @@ RSpec.describe UsersController, :type => :controller do
     context '自分自身がアクセスしたとき' do
       before do
         login(alice)
-        get :show, id:alice.id
+        get :show, id:alice.id_alias
       end
 
       it '@userに、リクエストしたUser オブジェクトが格納されていること' do
@@ -29,7 +29,7 @@ RSpec.describe UsersController, :type => :controller do
       let!(:bob){ FactoryGirl.create :user }
       before do
         login(bob)
-        get :show, id:alice.id
+        get :show, id:alice.id_alias
       end
 
       it '@userに、リクエストしたUser オブジェクトが格納されていること' do
@@ -47,7 +47,7 @@ RSpec.describe UsersController, :type => :controller do
 
     context 'guestがアクセスしたとき' do
       before do
-        get :show, id:alice.id
+        get :show, id:alice.id_alias
       end
 
       it '@userに、リクエストしたUser オブジェクトが格納されていること' do
@@ -69,7 +69,7 @@ RSpec.describe UsersController, :type => :controller do
 
     context '未ログインユーザがアクセスしたとき' do
       before {
-        delete :destroy, id:alice.id
+        delete :destroy, id:alice.id_alias
       }
       it_should_behave_like '認証が必要なページ'
     end
@@ -78,12 +78,12 @@ RSpec.describe UsersController, :type => :controller do
       before { login(alice) }
 
       it 'Userレコードが1件減っていること' do
-        expect{ delete :destroy, id: alice.id }.
+        expect{ delete :destroy, id: alice.id_alias }.
             to change { User.count }.by(-1)
       end
 
       it 'showテンプレートをrenderしていること' do
-        delete :destroy, id: alice.id
+        delete :destroy, id: alice.id_alias
         ## noticeのテストはできないみたいなので、省いています。
         # expect(response).to redirect_to( :controller => 'welcome', :action => 'index', :notice => '退会しました' )
         expect(response).to redirect_to( :controller => 'welcome', :action => 'index' )
@@ -95,12 +95,12 @@ RSpec.describe UsersController, :type => :controller do
       before { login(not_owner) }
 
       it 'Userレコードが減っていないこと' do
-        expect{ delete :destroy, id: alice.id }.
+        expect{ delete :destroy, id: alice.id_alias }.
             not_to change { User.count }
       end
 
       it 'error404テンプレートをrenderしていること' do
-        delete :destroy, id: alice.id
+        delete :destroy, id: alice.id_alias
         expect(response).to render_template :error404
       end
     end

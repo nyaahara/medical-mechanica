@@ -14,7 +14,7 @@
         <%= image_tag symptom.user.image_url, :class => 'original-icon' %>
       </div>
       <div class="">
-          <%= link_to user_path(symptom.user) do %>
+          <%= link_to user_path(symptom.user.id_alias) do %>
               <%= symptom.user.nickname %>
           <% end %>
           さんが新しく記録しました。
