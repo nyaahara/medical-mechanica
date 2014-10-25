@@ -42,6 +42,7 @@ gem 'spring',        group: :development
 
 gem 'omniauth', '~> 1.2.1'
 gem 'omniauth-twitter', '~> 1.0.1'
+gem 'omniauth-facebook'
 gem 'carrierwave', '~> 0.10.0'
 
 

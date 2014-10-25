@@ -4,11 +4,19 @@ class SessionsController < ApplicationController
     auth = Auth.find_by(provider: req[:provider], uid: req[:uid])
 
     if auth.present?
-      user = User.find(id: auth.user_id)
-      user.update({image_url: req[:info][:image], id_alias: req[:info][:nickname]})
+      user_id = auth.user_id
+      user = User.find(user_id)
+      user.update({image_url: req[:info][:image]})
     else
       # new user
-      user = User.create_from_auth_hash(req)
+      case req[:provider]
+        when 'twitter'
+          user = User.create_from_twitter_auth_hash(req)
+        when 'facebook'
+          user = User.create_from_facebook_auth_hash(req)
+        else
+          raise StandardError
+      end
       Auth.create_from_auth_hash(req, user)
     end
 

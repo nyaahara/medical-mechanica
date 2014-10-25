@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :user_self?, except: :show
 
   def show
-    @user = User.where(id_alias: params[:id]).limit(1)[0]
+    @user = User.find_by_id_alias(params[:id])
     @symptoms = Symptom.where(:user_id => @user.id).reverse_order
   end
 
