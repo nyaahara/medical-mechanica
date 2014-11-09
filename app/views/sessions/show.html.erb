@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>
+      ログイン・新規登録
+    </h1>
+
+    <div class="col-xs-12 col-md-6">
+        Twitter / Facebook のボタンからログインすることができます。<BR>
+        ※ ログインできない方は、お手数ですがブラウザから ki6.herokuapp.com の cookie を削除してから、再ログインを試みてください。
+    </div>
+
+    <div class="col-xs-12 col-md-6 text-center step">
+        <%= link_to 'Twitterでログイン', '/auth/twitter', class:'btn btn-info btn-block btn-lg' %><br>
+        <%= link_to 'Facebookでログイン', '/auth/facebook', class:'btn btn-primary btn-block btn-lg' %><br>
+    </div>
+
+</div>

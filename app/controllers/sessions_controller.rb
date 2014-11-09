@@ -1,4 +1,10 @@
 class SessionsController < ApplicationController
+
+  def show
+    # nothing
+  end
+
+
   def create
     req = request.env['omniauth.auth']
     auth = Auth.find_by(provider: req[:provider], uid: req[:uid])
@@ -21,7 +27,7 @@ class SessionsController < ApplicationController
     end
 
     session[:user_id] = user.id
-    redirect_to controller: 'users', action: 'show', id: user.id_alias, notice: 'ログインしました'
+    redirect_to controller: 'users', action: 'show', id: user.id, notice: 'ログインしました'
   end
 
   def destroy

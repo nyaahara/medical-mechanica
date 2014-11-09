@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback' => 'sessions#create'
 
   # as: :logout とすることで、logout_pathとして参照できる。
+  get '/login' => 'sessions#show', as: :login
   get '/logout' => 'sessions#destroy', as: :logout
 
   match '*path' => 'application#error404', via: :all

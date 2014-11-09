@@ -11,8 +11,6 @@ RSpec.describe User, :type => :model do
     it { should validate_presence_of(:uid) }
     it { should ensure_length_of(:nickname).is_at_most(50) }
     it { should ensure_length_of(:image_url).is_at_most(255) }
-    it { should validate_presence_of(:id_alias) }
-    it { should ensure_length_of(:id_alias).is_at_most(50) }
   end
 
 
@@ -35,7 +33,6 @@ describe '.find_or_create_from_auth_hash' do
         expect(user.uid).to eq 'uid'
         expect(user.nickname).to eq 'newuser'
         expect(user.image_url).to eq 'http://example.com/newuser.jpg'
-        expect(user.id_alias).to eq 'newuser'
         expect(user).to be_persisted
       end
 

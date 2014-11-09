@@ -12,7 +12,13 @@
             <BR>
             記録した症状は全てのユーザーに公開されます。<BR>
             ご理解の上、ご利用ください。<BR>
-            また、Kirokuを利用するためにはTwitterのアカウントが必要です。<BR>
+            また、Kirokuを利用するためにはTwitter、もしくは、Facebookのアカウントが必要です。<BR>
+        </div>
+        <br>
+        <div class="col-xs-12 col-md-4">
+            <% unless logged_in? %>
+                <%= link_to 'ログイン・新規登録', login_path, class:'btn btn-success btn-lg btn-block' %>
+            <% end %>
         </div>
     </div>
 </div>
@@ -50,10 +56,10 @@
 <div class="start-kiroku">
     <div class="col-xs-12 col-md-4">
         <% unless logged_in? %>
-            <%= link_to 'Kirokuをはじめる', '/auth/twitter', class:'btn btn-danger btn-lg btn-block' %>
+            <%= link_to 'ログイン・新規登録', login_path, class:'btn btn-success btn-lg btn-block' %>
         <% else %>
-            <%= link_to '記録する', new_user_symptom_path(current_user.id_alias), class:'btn btn-default' %>
-            <%= link_to '記録を見る', user_path(current_user.id_alias) , class:'btn btn-default' %>
+            <%= link_to '記録する', new_user_symptom_path(current_user.id), class:'btn btn-success btn-lg btn-block' %>
+            <%= link_to '記録を見る', user_path(current_user.id) , class:'btn btn-info btn-lg btn-block' %>
         <% end %>
     </div>
     <div class="col-xs-12 col-md-8 step">

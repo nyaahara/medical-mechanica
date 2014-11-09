@@ -15,7 +15,9 @@
     <% else %>
         <%= render partial: 'symptoms', locals: {user: @user, symptoms: @symptoms} %>
     <% end %>
-    <%= link_to '記録する', new_user_symptom_path(current_user.id_alias), class:'btn btn-primary btn-lg' %>
+    <div class="col-xs-12 col-md-4">
+        <%= link_to '記録する', new_user_symptom_path(current_user.id), class:'btn btn-success btn-lg btn-block' %>
+    </div>
 </div>
 
 </div>

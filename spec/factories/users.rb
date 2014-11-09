@@ -6,6 +6,5 @@ FactoryGirl.define do
     sequence(:uid) { |i| "uid#{i}" }
     sequence(:nickname) { |i| "nickname#{i}" }
     sequence(:image_url) { |i| "http://example.com/image#{i}.jpg" }
-    sequence(:id_alias) { |i| "alias#{i}" }
   end
 end

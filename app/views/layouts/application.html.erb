@@ -34,15 +34,14 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
-          <li><%= link_to '記録する', new_user_symptom_path(current_user.id_alias) %></li>
-            <li><%= link_to  user_path(current_user.id_alias) do %>
+          <li><%= link_to '記録する', new_user_symptom_path(current_user.id) %></li>
+            <li><%= link_to  user_path(current_user.id) do %>
                 <%= image_tag current_user.image_url, :class => 'small-icon' %> 記録を見る
               <% end %>
             </li>
             <li><%= link_to 'ログアウト', logout_path %></li>
           <% else %>
-            <li><%= link_to 'Twitterでログイン', '/auth/twitter' %></li>
-            <li><%= link_to 'Facebookでログイン', '/auth/facebook' %></li>
+            <li><%= link_to 'ログイン・新規登録', login_path %></li>
           <% end %>
         </ul>
       </div>
@@ -68,7 +67,7 @@
   </div>
   <footer class="footer navbar navbar-default text-center" role="navigation">
       <div class="howto">
-          <%= link_to 'Kirokuとは', 'info' %>
+          <%= link_to 'Kirokuとは', info_path %>
       </div>
 
       <div class="contact">
