@@ -1,19 +1,24 @@
 class User < ActiveRecord::Base
 
   has_many :symptom
+  has_many :auth
 
-  validates :provider, presence: true
-  validates :uid, presence: true
   validates :nickname, length: { maximum: 50 }
   validates :image_url, length: { maximum: 255 }
-  
-  def self.find_or_create_from_auth_hash(auth_hash)
-    provider = auth_hash[:provider]
-    uid = auth_hash[:uid]
+
+  def self.create_from_facebook_auth_hash(auth_hash)
+    name = auth_hash[:info][:name]
+    image_url = auth_hash[:info][:image]
+    User.create do|user|
+      user.nickname = name
+      user.image_url = image_url
+    end
+  end
+
+  def self.create_from_twitter_auth_hash(auth_hash)
     nickname = auth_hash[:info][:nickname]
     image_url = auth_hash[:info][:image]
-
-    User.find_or_create_by(provider: provider, uid: uid) do |user|
+    User.create do|user|
       user.nickname = nickname
       user.image_url = image_url
     end

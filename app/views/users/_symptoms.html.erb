@@ -18,10 +18,10 @@
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         <% end %>
         <% if symptom.created_by?(current_user) %>
-            <%= link_to edit_user_symptom_path(current_user,symptom) do %>
+            <%= link_to edit_user_symptom_path(current_user.id,symptom) do %>
                 編集
             <% end %>
-            <%= link_to user_symptom_path(current_user,symptom), method: :delete, data: {confirm: '本当に削除しますか？'} do %>
+            <%= link_to user_symptom_path(current_user.id,symptom), method: :delete, data: {confirm: '本当に削除しますか？'} do %>
                 削除
             <% end %>
         <% end %>

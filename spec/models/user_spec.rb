@@ -20,8 +20,8 @@ describe '.find_or_create_from_auth_hash' do
         provider: 'twitter',
         uid: 'uid',
         info: {
-          nickname: 'netwillnet',
-          image: 'http://example.com/netwillnet.jpg'
+          nickname: 'newuser',
+          image: 'http://example.com/newuser.jpg'
         }
       }
     end
@@ -31,8 +31,8 @@ describe '.find_or_create_from_auth_hash' do
         user = User.find_or_create_from_auth_hash(auth_hash)
         expect(user.provider).to eq 'twitter'
         expect(user.uid).to eq 'uid'
-        expect(user.nickname).to eq 'netwillnet'
-        expect(user.image_url).to eq 'http://example.com/netwillnet.jpg'
+        expect(user.nickname).to eq 'newuser'
+        expect(user.image_url).to eq 'http://example.com/newuser.jpg'
         expect(user).to be_persisted
       end
 

@@ -34,14 +34,14 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <% if logged_in? %>
-          <li><%= link_to '記録する', new_user_symptom_path(current_user) %></li>
-            <li><%= link_to  user_path(current_user) do %>
+          <li><%= link_to '記録する', new_user_symptom_path(current_user.id) %></li>
+            <li><%= link_to  user_path(current_user.id) do %>
                 <%= image_tag current_user.image_url, :class => 'small-icon' %> 記録を見る
               <% end %>
             </li>
             <li><%= link_to 'ログアウト', logout_path %></li>
           <% else %>
-            <li><%= link_to 'Twitterでログイン', '/auth/twitter' %></li>
+            <li><%= link_to 'ログイン・新規登録', login_path %></li>
           <% end %>
         </ul>
       </div>
@@ -67,20 +67,44 @@
   </div>
   <footer class="footer navbar navbar-default text-center" role="navigation">
       <div class="howto">
-          <%= link_to 'Kirokuとは', 'info' %>
+          <%= link_to 'Kirokuとは', info_path %>
       </div>
 
       <div class="contact">
+          <div
+          class="fb-like"
+          data-share="true"
+          data-width="450"
+          data-show-faces="true">
+          </div>
           <a href="https://twitter.com/share" class="twitter-share-button" data-text="体調不良を記録するWebサービスkiroku" data-via="nyaahara" data-lang="ja" data-hashtags="kiroku">ツイート</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
           <a href="https://twitter.com/nyaahara" class="twitter-follow-button" data-show-count="false" data-lang="ja">@nyaaharaさんをフォロー</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
       </div>
 
       <div class="copyright">
           &copy; 2014 NIIHARA Daisuke.
       </div>
   </footer>
-  
+
+  <script>
+      window.fbAsyncInit = function() {
+          FB.init({
+              appId      : '471020046370970',
+              xfbml      : true,
+              version    : 'v2.1'
+          });
+      };
+
+      (function(d, s, id){
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+  </script>
 </body>
 </html>
