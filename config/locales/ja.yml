@@ -6,3 +6,14 @@ ja:
       previous: "&lsaquo;"
       next: "&rsaquo;"
       truncate: "..."
+
+  activerecord:
+    errors:
+      models:
+        symptom:
+          attributes:
+            parts:
+              blank: "何も入力されていません。下記の人体図をクリックして症状を入力して下さい。"
+    attributes:
+      symptom:
+          parts: "症状"
