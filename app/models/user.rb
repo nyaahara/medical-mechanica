@@ -23,4 +23,16 @@ class User < ActiveRecord::Base
       user.image_url = image_url
     end
   end
+
+  def has_twitter?
+    auth.find_by_user_id(id).provider == 'twitter'
+  end
+
+  def has_facebook?
+    auth.find_by_user_id(id).provider == 'facebook'
+  end
+
+  def facebook_url
+    'https://facebook.com/' + auth.find_by_user_id(id).uid
+  end
 end

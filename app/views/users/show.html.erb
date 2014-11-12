@@ -1,4 +1,4 @@
-<div class="container">
+<div CLASS="container">
 <h3>
     <div class="pull-left">
         <%= image_tag @user.image_url, :class => 'original-icon' %>
@@ -7,6 +7,14 @@
         <%= @user.nickname %>さんの記録
     </div>
 </h3>
+<div>
+    <% if @user.has_twitter? %>
+        <a href="https://twitter.com/<%=@user.nickname%>" target="_blank"><%=@user.nickname%>さんのTwitter</a>
+    <% end %>
+    <% if @user.has_facebook? %>
+        <a href="<%=@user.facebook_url%>" target="_blank"><%=@user.nickname%>さんのFacebook</a>
+    <% end %>
+</div>
 
 <div class="description">
     <% if @symptoms.count==0 %>
