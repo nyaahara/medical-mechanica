@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
 
-  factory :symptom do
+  factory :symptom, class: Symptom do
     user
     parts { Array.new(3) { FactoryGirl.build(:part) } }
     factory :invalid_symptom do
