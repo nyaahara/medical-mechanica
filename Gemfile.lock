@@ -6,14 +6,14 @@ GIT
 
 GIT
   remote: git://github.com/rspec/rspec-core.git
-  revision: bc6adc8e22a512ea21a7761f2a697c4236ade664
+  revision: c5f9edb87d50e8697b59f5d806bd01e2f50b4d9a
   specs:
     rspec-core (3.2.0.pre)
       rspec-support (= 3.2.0.pre)
 
 GIT
   remote: git://github.com/rspec/rspec-expectations.git
-  revision: 854092d34fa28dabf2bdc9e45118107cae413392
+  revision: 09ec82cd7b8805b5c826c832d5ad1d151520587c
   specs:
     rspec-expectations (3.2.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -21,7 +21,7 @@ GIT
 
 GIT
   remote: git://github.com/rspec/rspec-mocks.git
-  revision: 5254af27054acfefa05aedb350bbe015cefdb06a
+  revision: d6a89d3028963fbea1bfbdde0ce39bf15386d800
   specs:
     rspec-mocks (3.2.0.pre)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -29,7 +29,7 @@ GIT
 
 GIT
   remote: git://github.com/rspec/rspec-rails.git
-  revision: a25c04210176b7e14999b1b7de8ce59b9dd5cd2d
+  revision: dd72e25f941c4a705fe29ec18dcd28e174341d8c
   specs:
     rspec-rails (3.2.0.pre)
       actionpack (>= 3.0)
@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: git://github.com/rspec/rspec-support.git
-  revision: 3b48ab54b732016956811f625b39ad60a6a6b433
+  revision: 7f3d1aa1eb0c742d6e21d034e7088602b373b77a
   specs:
     rspec-support (3.2.0.pre)
 
@@ -110,7 +110,7 @@ GEM
     hashie (3.3.1)
     hike (1.2.3)
     i18n (0.6.11)
-    jbuilder (2.2.4)
+    jbuilder (2.2.5)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     jquery-rails (3.1.2)
@@ -126,7 +126,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25.1)
     mini_portile (0.6.1)
-    minitest (5.4.2)
+    minitest (5.4.3)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
