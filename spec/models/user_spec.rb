@@ -7,55 +7,92 @@ RSpec.describe User, :type => :model do
   end
 
   describe User do
-    it { should validate_presence_of(:provider) }
-    it { should validate_presence_of(:uid) }
     it { should ensure_length_of(:nickname).is_at_most(50) }
     it { should ensure_length_of(:image_url).is_at_most(255) }
   end
 
-
-describe '.find_or_create_from_auth_hash' do
+  describe 'create_from_twitter_auth_hash' do
     let(:auth_hash) do
       {
-        provider: 'twitter',
-        uid: 'uid',
-        info: {
-          nickname: 'newuser',
-          image: 'http://example.com/newuser.jpg'
-        }
+          provider: 'twitter',
+          uid: 'uid',
+          info: {
+              nickname: 'newuser',
+              image: 'http://example.com/newuser.jpg'
+          }
       }
     end
 
-    context '引数のproviderとuidに対応するUserが作成されていないとき' do
-      it '引数で設定した属性のUserオブジェクトが返ること' do
-        user = User.find_or_create_from_auth_hash(auth_hash)
-        expect(user.provider).to eq 'twitter'
-        expect(user.uid).to eq 'uid'
+    context '新規登録の場合' do
+      it 'Userモデルのレコード返ってくること' do
+        user = User.create_from_twitter_auth_hash(auth_hash)
         expect(user.nickname).to eq 'newuser'
         expect(user.image_url).to eq 'http://example.com/newuser.jpg'
         expect(user).to be_persisted
       end
-
-      it 'Userモデルのレコードが一件増えていること' do
-        expect { User.find_or_create_from_auth_hash(auth_hash) }.
-          to change { User.count }.from(0).to(1)
-      end
-    end
-
-    context '引数のproviderとuidに対応するUserが作成されているとき' do
-      let!(:created_user) { FactoryGirl.create :user, provider: 'twitter', uid: 'uid' }
-
-      it '引数に対応するUserレコードのオブジェクトが返ること' do
-        user = User.find_or_create_from_auth_hash(auth_hash)
-        expect(user).to eq created_user
+      it 'Userモデルのレコードが1件増えていること' do
+        expect { User.create_from_twitter_auth_hash(auth_hash) }.to change { User.count }.from(0).to(1)
       end
 
-      it 'Userモデルのレコード件数が変化していないこと' do
-        expect { User.find_or_create_from_auth_hash(auth_hash) }.
-          not_to change { User.count }
-      end
     end
   end
 
+  describe 'create_from_facebook_auth_hash' do
+    let(:auth_hash) do
+      {
+          provider: 'facebook',
+          uid: 'uid',
+          info: {
+              name: 'faceuser',
+              image: 'http://example.com/faceuser.jpg'
+          }
+      }
+    end
+
+    context '新規登録の場合' do
+      it 'Userモデルのレコード返ってくること' do
+        user = User.create_from_facebook_auth_hash(auth_hash)
+        expect(user.nickname).to eq 'faceuser'
+        expect(user.image_url).to eq 'http://example.com/faceuser.jpg'
+        expect(user).to be_persisted
+      end
+      it 'Userモデルのレコードが1件増えていること' do
+        expect { User.create_from_facebook_auth_hash(auth_hash) }.to change { User.count }.from(0).to(1)
+      end
+
+    end
+  end
+
+  describe 'has_twitter?' do
+    let(:twitter_user) { FactoryGirl.create(:twitter_user) }
+    let(:facebook_user) { FactoryGirl.create(:facebook_user) }
+    it 'twitter_userでtrueが返ってくること' do
+      expect(twitter_user.has_twitter?).to be_truthy
+    end
+    it 'facebook_userでfalseが返ってくること' do
+      expect(facebook_user.has_twitter?).to be_falsey
+    end
+  end
+
+  describe 'has_facebook?' do
+    let(:twitter_user) { FactoryGirl.create(:twitter_user) }
+    let(:facebook_user) { FactoryGirl.create(:facebook_user) }
+    it 'twitter_userでfalseが返ってくること' do
+      expect(twitter_user.has_facebook?).to be_falsey
+    end
+    it 'facebook_userでtrueが返ってくること' do
+      expect(facebook_user.has_facebook?).to be_truthy
+    end
+
+  end
+
+  describe 'facebook_url' do
+    let(:facebook_user) { FactoryGirl.create(:facebook_user) }
+    it 'facebook_urlが返ってくること' do
+      auth = facebook_user.auth.find_by_user_id(facebook_user.id)
+      expect(facebook_user.facebook_url).to eq('https://facebook.com/'+auth.uid)
+    end
+
+  end
 end
  
